@@ -28,15 +28,19 @@ class Server {
       .then(() => logger.info("Database connected..."))
       .catch((e) => {
         logger.error(new Error("Database connection error"));
-        process.exit(1)
-      }
-      );
+        process.exit(1);
+      });
   }
 
   private config() {
     if (config.isDev) {
       this.app.use(
-        morgan("[:date[iso]] :method :url :status :response-time ms")
+        morgan(":method :url :status :response-time ms", {
+          stream: {
+            // Configure Morgan to use our custom logger with the http severity
+            write: (message) => logger.http(message.trim()),
+          },
+        })
       );
     }
     if (config.isProd) {
@@ -67,7 +71,7 @@ class Server {
 
   public bootstrap() {
     return this.app.listen(this.port, () => {
-        logger.info("Server started on port: ", this.port);
+      logger.info("Server started on port: ", this.port);
     });
   }
 }

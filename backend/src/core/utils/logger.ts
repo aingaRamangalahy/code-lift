@@ -2,7 +2,7 @@ import winston from "winston";
 const { combine, timestamp, colorize, align, printf } = winston.format;
 
 const logger = winston.createLogger({
-  level: "info",
+  level: "http",
   format: combine(
     colorize({ all: true }),
     timestamp({
