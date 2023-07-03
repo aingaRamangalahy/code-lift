@@ -5,7 +5,7 @@ import * as path from "path";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
 
-import { DB_URI, BODY_PARSER_LIMIT } from "../config";
+import { DB_URI, BODY_PARSER_LIMIT } from "@config/index";
 
 import Route from "./router";
 // import { errorHandler } from "./middlewares";

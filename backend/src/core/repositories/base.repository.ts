@@ -1,4 +1,4 @@
-import { IDatabase } from "../interfaces";
+import { IDatabase } from "@core/interfaces";
 import { Model } from "mongoose";
 
 export abstract class BaseRepository<T> implements IDatabase<T> {

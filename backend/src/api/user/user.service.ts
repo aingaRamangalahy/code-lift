@@ -1,7 +1,7 @@
 import { Service } from "typedi";
 import { IUserDocument } from "./user.interface";
 import User from "./user.modele";
-import { ErrorResponse } from "../../core/utils";
+import { ErrorResponse } from "@core/utils";
 import { UserRepository } from "./user.repository";
 
 @Service()

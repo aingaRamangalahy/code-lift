@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
-import { ErrorResponse } from "../../core/utils";
+import { ErrorResponse } from "@core/utils";
 import { asyncHandler } from "./asyncHandler";
 
 import * as jwt from "jsonwebtoken";
 
-import User from "../../modules/user/user.modele";
-import { ExtendedRequest } from "../interfaces";
-import { JWT_SECRET } from "../../config";
-import { UserRepository } from "../../modules/user/user.repository";
+import User from "@api/user/user.modele";
+import { UserRepository } from "@api/user/user.repository";
+import { ExtendedRequest } from "@core/interfaces";
+import { JWT_SECRET } from "@config/index";
 
 class Auth {
   private readonly userRepository: UserRepository;

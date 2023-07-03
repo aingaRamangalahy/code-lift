@@ -7,5 +7,11 @@
       "outDir": "./build",
       "lib": ["es2015"],
       "skipLibCheck": true,
+      "baseUrl": "src",
+      "paths": {
+        "@core/*": ["./core/*"],
+        "@config/*": ["./config/*"],
+        "@api/*": ["./api/*"],
+      }
     },
 }

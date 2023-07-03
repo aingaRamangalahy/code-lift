@@ -1,6 +1,6 @@
 import { Router } from "express"
 
-import userRoute from "../modules/user/user.route";
+import userRoute from "@api/user/user.route";
 
 export default class Route {
     router: Router

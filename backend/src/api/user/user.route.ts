@@ -1,6 +1,6 @@
 import { Router } from "express";
 import UserController from "./user.controller";
-import { auth } from "../../core/middlewares";
+import { auth } from "@core/middlewares";
 class UserRouter {
     router: Router;
 

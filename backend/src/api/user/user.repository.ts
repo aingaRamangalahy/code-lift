@@ -1,5 +1,5 @@
 import { IUserDocument } from "./user.interface";
-import { BaseRepository } from "../../core/repositories";
+import { BaseRepository } from "@core/repositories";
 
 export class UserRepository extends BaseRepository<IUserDocument> {
   addUser = (user: any) => {
