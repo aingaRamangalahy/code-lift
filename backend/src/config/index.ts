@@ -13,3 +13,9 @@ export const MAX_FILE_UPLOAD = process.env.MAX_FILE_UPLOAD;
 export const JWT_SECRET = process.env.JWT_SECRET;
 export const JWT_EXPIRE = process.env.JWT_EXPIRE;
 export const JWT_COOKIE_EXPIRE = process.env.JWT_COOKIE_EXPIRE;
+
+export const config = {
+  isDev: process.env.NODE_ENV === "development",
+  isProd: process.env.NODE_ENV === "production",
+  isTest: process.env.NODE_ENV === "testing"
+}
