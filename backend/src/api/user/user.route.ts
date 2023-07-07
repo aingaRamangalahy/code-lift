@@ -14,8 +14,8 @@ class UserRouter {
         this.router.get("/:id", UserController.getUser);
         this.router.get(
             "",
-            // auth.protectRoute,
-            // auth.authorizedRoles("admin"),
+            auth.protectRoute,
+            auth.authorizedRoles("admin"),
             UserController.getUsers
         );
 

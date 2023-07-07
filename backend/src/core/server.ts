@@ -7,7 +7,7 @@ import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
 
 import { DB_URI, BODY_PARSER_LIMIT, config } from "@config/index";
-import { logger } from "./utils/logger";
+import { logger } from "@config/logger";
 
 import Route from "./router";
 // import { errorHandler } from "./middlewares";

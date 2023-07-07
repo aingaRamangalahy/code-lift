@@ -4,7 +4,7 @@ import { asyncHandler } from "./asyncHandler";
 
 import * as jwt from "jsonwebtoken";
 
-import User from "@api/user/user.modele";
+import User from "@api/user/user.model";
 import { UserRepository } from "@api/user/user.repository";
 import { ExtendedRequest } from "@core/interfaces";
 import { JWT_SECRET } from "@config/index";

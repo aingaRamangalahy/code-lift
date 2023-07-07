@@ -12,6 +12,8 @@
         "@core/*": ["./core/*"],
         "@config/*": ["./config/*"],
         "@api/*": ["./api/*"],
-      }
+      },
     },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "cli"]
 }

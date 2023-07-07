@@ -1,0 +1,13 @@
+import { I{{ className }}, I{{ className }}Document } from "./{{ fileName }}.interface";
+
+let Schema = mongoose.Schema;
+let {{ className }}Schema = new Schema<I{{ className }}Document>(
+    {
+        createdAt: { type: Date, default: Date.now },
+        updatedAt: { type: Date, required: false },
+    },
+    { _id: true }
+);
+
+
+export default mongoose.model<I{{ className }}Document>("{{ className }}", {{ className }}Schema);
