@@ -1,0 +1,90 @@
+import { Service } from "typedi";
+import { I{{ className }}Document } from "./{{ fileName }}.interface";
+import {{ className }} from "./{{ fileName }}.model";
+import { ErrorResponse } from "@core/utils";
+import { {{ className }}Repository } from "./{{ fileName }}.repository.mustache";
+
+@Service()
+export default class {{ className }}Service {
+    private readonly {{ fileName }}Repository: {{ className }}Repository;
+
+    constructor() {
+        this.{{ fileName }}Repository = new {{ className }}Repository({{ className }});
+    }
+
+    create{{ className }} = async ({{ fileName }}Payload: I{{ className }}Document) => {
+        try {
+            const {{ fileName }} = await this.{{ fileName }}Repository.add{{ className }}({{ fileName }}Payload);
+            return {
+                success: true,
+                data: {{ fileName }},
+            };
+        } catch (error) {
+            /**thorw errors to let erroHandler handle them */
+            throw error;
+        }
+    };
+
+    getAll{{ className }}s = async () => {
+        try {
+            const {{ fileName }}s = await this.{{ fileName }}Repository.get{{ className }}s();
+            return {
+                success: true,
+                data: {{ fileName }}s,
+            };
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    get{{ className }}ById = async (id: string) => {
+        try {
+            const {{ fileName }} = await this.{{ fileName }}Repository.get{{ className }}ById(id);
+
+            if (!{{ fileName }}) {
+                throw new ErrorResponse(`{{ className }} with id: ${id} not found`, 404);
+            }
+
+            return {
+                success: true,
+                data: {{ fileName }},
+            };
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    update{{ className }} = async (id: string, {{ fileName }}Payload: I{{ className }}Document) => {
+        try {
+            const {{ fileName }} = await this.{{ fileName }}Repository.update{{ className }}(id, {{ fileName }}Payload);
+
+            if (!{{ fileName }}) {
+                throw new ErrorResponse(`{{ className }} with id: ${id} not found`, 404);
+            }
+
+            return {
+                success: true,
+                data: {{ fileName }},
+            };
+
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    delete{{ className }} = async (id: string) => {
+        try {
+            const {{ fileName }} = await this.{{ fileName }}Repository.delete{{ className }}(id);
+            if (!{{ fileName }}) {
+                throw new ErrorResponse(`{{ className }} with id: ${id} not found`, 404);
+            }
+            return {
+                success: true,
+                data: `{{ className }} removed successfully`,
+            };
+            
+        } catch (error) {
+            throw error;
+        }
+    };
+}
