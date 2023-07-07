@@ -10,7 +10,7 @@ import { DB_URI, BODY_PARSER_LIMIT, config } from "@config/index";
 import { logger } from "@config/logger";
 
 import Route from "./router";
-import { errorHandler } from "./middlewares/errorHandler";
+import { errorHandler } from "./core/middlewares/errorHandler";
 
 class Server {
   private app: express.Application;
