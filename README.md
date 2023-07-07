@@ -12,7 +12,7 @@ To set up the resource sharing platform locally, follow these steps:
 
 3. Configure the environment variables by creating a `.env` file and providing the required values. Refer to the `.env.example` file for the required variables.
 
-4. Start the development server by running the command: `npm run start:dev`.
+4. Start the development server by running the command: `npm run dev`.
 
 ### Contributing
 
