@@ -1,5 +1,5 @@
 import 'reflect-metadata'; // required by typedi
-import Server from "./core";
+import Server from "./server";
 import { PORT } from "./config";
 
 const appPort = PORT || 5000
