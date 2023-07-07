@@ -1,34 +1,34 @@
-import * as mongoose from "mongoose";
-import * as bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
+import * as mongoose from 'mongoose'
+import * as bcrypt from 'bcrypt'
+import * as jwt from 'jsonwebtoken'
 
-import { IUser, IUserDocument } from "./user.interface";
-import { JWT_SECRET, JWT_EXPIRE } from "@config/index";
+import { IUser, IUserDocument } from './user.interface'
+import { JWT_SECRET, JWT_EXPIRE } from '@config/index'
 
-let Schema = mongoose.Schema;
+let Schema = mongoose.Schema
 let UserSchema = new Schema<IUserDocument>(
     {
         name: {
             type: String,
-            required: [true, "Please add a name"],
+            required: [true, 'Please add a name'],
         },
         email: {
             type: String,
-            required: [true, "Please add an email"],
+            required: [true, 'Please add an email'],
             unique: true,
             match: [
                 /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                "Please add a valid email",
+                'Please add a valid email',
             ],
         },
         role: {
             type: String,
-            enum: ["user", "writer"],
-            default: "user",
+            enum: ['user', 'sender'],
+            default: 'user',
         },
         password: {
             type: String,
-            required: [true, "Please add a password"],
+            required: [true, 'Please add a password'],
             minlength: 6,
             select: false,
         },
@@ -53,19 +53,19 @@ let UserSchema = new Schema<IUserDocument>(
         updatedAt: { type: Date, required: false },
     },
     { _id: true }
-);
+)
 
 /**
  * Crypt user password before save
  */
-UserSchema.pre<IUserDocument>("save", async function (next: Function) {
-    if (!this.isModified("password")) {
-        next();
+UserSchema.pre<IUserDocument>('save', async function (next: Function) {
+    if (!this.isModified('password')) {
+        next()
     }
 
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-});
+    const salt = await bcrypt.genSalt(10)
+    this.password = await bcrypt.hash(this.password, salt)
+})
 
 /**
  * generate a jwt token
@@ -79,8 +79,8 @@ UserSchema.methods.generateToken = function (this: IUserDocument) {
         },
         JWT_SECRET,
         { expiresIn: JWT_EXPIRE }
-    );
-};
+    )
+}
 
 /**
  * match database password with user input
@@ -90,7 +90,7 @@ UserSchema.methods.matchPassword = async function (
     this: IUserDocument,
     inputPassword: string
 ) {
-    return await bcrypt.compare(inputPassword, this.password);
-};
+    return await bcrypt.compare(inputPassword, this.password)
+}
 
-export default mongoose.model<IUserDocument>("User", UserSchema);
+export default mongoose.model<IUserDocument>('User', UserSchema)

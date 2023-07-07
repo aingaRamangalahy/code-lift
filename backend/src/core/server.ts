@@ -10,7 +10,7 @@ import { DB_URI, BODY_PARSER_LIMIT, config } from "@config/index";
 import { logger } from "@config/logger";
 
 import Route from "./router";
-// import { errorHandler } from "./middlewares";
+import { errorHandler } from "./middlewares/errorHandler";
 
 class Server {
   private app: express.Application;
@@ -66,7 +66,7 @@ class Server {
     this.app.use(appRoutes);
 
     // error handler
-    // this.app.use(errorHandler);
+    this.app.use(errorHandler);
   }
 
   public bootstrap() {
