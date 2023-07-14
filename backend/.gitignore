@@ -2,3 +2,4 @@
 /public/uploads
 .env
 /backend_logs
+/coverage

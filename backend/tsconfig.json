@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
       "experimentalDecorators": true,
-      "module": "commonjs",
+      "emitDecoratorMetadata": true,
       "esModuleInterop": true,
+      "module": "commonjs",
       "target": "es5",
       "outDir": "./build",
       "lib": ["es2015"],
@@ -14,6 +15,6 @@
         "@api/*": ["./api/*"],
       },
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "setupTests.ts"],
     "exclude": ["node_modules", "cli"]
 }
