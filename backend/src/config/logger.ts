@@ -5,7 +5,6 @@ const { combine, timestamp, colorize, align, printf } = format
 const logger = createLogger({
     level: 'http',
     format: combine(
-        colorize({ all: true }),
         timestamp({
             format: 'YYYY-MM-DD hh:mm:ss.SSS A',
         }),

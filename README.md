@@ -49,3 +49,39 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 If you have any questions or need further assistance, please feel free to contact the project maintainers at [aingaramangalahy@gmail.com](mailto:aingaramangalahy@gmail.com).
 
 Happy learning and coding!
+
+### project structure
+```
+code-lift
+├─ .prettierrc
+├─ README.md
+└─ backend
+   ├─ .env
+   ├─ .env.example
+   ├─ backend_logs
+   ├─ cli
+   │  ├─ cli.js
+   │  └─ templates
+   ├─ package-lock.json
+   ├─ package.json
+   ├─ src
+   │  ├─ api
+   │  │  ├─ auth
+   │  │  └─ user
+   │  ├─ app.ts
+   │  ├─ config
+   │  │  ├─ index.ts
+   │  │  └─ logger.ts
+   │  ├─ core
+   │  │  ├─ index.ts
+   │  │  ├─ interfaces
+   │  │  ├─ middlewares
+   │  │  ├─ repositories
+   │  │  └─ utils
+   │  │     ├─ errorResponse.ts
+   │  │     └─ index.ts
+   │  ├─ router.ts
+   │  └─ server.ts
+   └─ tsconfig.json
+
+```

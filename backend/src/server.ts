@@ -1,79 +1,64 @@
-import express from "express";
+import express, { Express} from "express";
+import { Server as HttpServer } from 'http'
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 import * as path from "path";
 import * as bodyParser from "body-parser";
-import * as mongoose from "mongoose";
 
-import { DB_URI, BODY_PARSER_LIMIT, config } from "@config/index";
+import { BODY_PARSER_LIMIT, config } from "@config/index";
 import { logger } from "@config/logger";
 
 import Route from "./router";
-import { errorHandler } from "./core/middlewares/errorHandler";
 
 class Server {
-  private app: express.Application;
+    public static app: Express
+    constructor() {}
 
-  constructor(private port) {
-    this.app = express();
-    this.config();
-  }
+    public static getServer(): Express {
+        if (!Server.app) {
+            const app = express()
+            Server.app = app
+        }
+        try {
+            if (config.isDev) {
+                Server.app.use(
+                    morgan(':method :url :status :response-time ms', {
+                        stream: {
+                            // Configure Morgan to use our custom logger with the http severity
+                            write: (message) => logger.http(message.trim()),
+                        },
+                    })
+                )
+            }
+            if (config.isProd) {
+                Server.app.use(morgan('combined'))
+            }
+            Server.app.use(helmet())
+            Server.app.use(cors())
 
-  // connect database
-  private connectDatabase() {
-    logger.info("connecting to database...");
-    mongoose
-      .connect(DB_URI)
-      .then(() => logger.info("Database connected..."))
-      .catch((e) => {
-        logger.error(new Error("Database connection error"));
-        process.exit(1);
-      });
-  }
+            // use body parser
+            Server.app.use(bodyParser.json({ limit: BODY_PARSER_LIMIT }))
+            Server.app.use(
+                bodyParser.urlencoded({
+                    limit: BODY_PARSER_LIMIT,
+                    extended: true,
+                })
+            )
 
-  private config() {
-    if (config.isDev) {
-      this.app.use(
-        morgan(":method :url :status :response-time ms", {
-          stream: {
-            // Configure Morgan to use our custom logger with the http severity
-            write: (message) => logger.http(message.trim()),
-          },
-        })
-      );
+            // Set static folder
+            Server.app.use(express.static(path.join(__dirname, 'public')))
+
+            // mount routes
+            const appRoutes = new Route().router
+            Server.app.use(appRoutes)
+
+            return Server.app
+        } catch (error) {
+            logger.error(error)
+            throw error
+        }
     }
-    if (config.isProd) {
-      this.app.use(morgan("combined"));
-    }
-    this.app.use(helmet());
-
-    this.connectDatabase();
-
-    this.app.use(cors());
-
-    // use body parser
-    this.app.use(bodyParser.json({ limit: BODY_PARSER_LIMIT }));
-    this.app.use(
-      bodyParser.urlencoded({ limit: BODY_PARSER_LIMIT, extended: true })
-    );
-
-    // Set static folder
-    this.app.use(express.static(path.join(__dirname, "public")));
-
-    // mount routes
-    const appRoutes = new Route().router;
-    this.app.use(appRoutes);
-
-    // error handler
-    this.app.use(errorHandler);
-  }
-
-  public bootstrap() {
-    return this.app.listen(this.port, () => {
-      logger.info("Server started on port: ", this.port);
-    });
-  }
-}
+} 
 
 export default Server;
