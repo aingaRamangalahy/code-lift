@@ -10,6 +10,7 @@ module.exports = {
       '^@core/(.*)$': resolve(__dirname, 'src/core/$1'),
       // Add more path aliases if needed
     },
+    setupFilesAfterEnv: ['./jest.setup.ts'],
 
     // setupFiles: ['./setupTests.ts'],
   
