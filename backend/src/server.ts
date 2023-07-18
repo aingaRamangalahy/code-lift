@@ -10,6 +10,7 @@ import { BODY_PARSER_LIMIT, config } from "@config/index";
 import { logger } from "@config/logger";
 
 import Route from "./router";
+import { errorHandler } from "@core/middlewares/errorHandler";
 
 class Server {
     public static app: Express
@@ -52,7 +53,8 @@ class Server {
             // mount routes
             const appRoutes = new Route().router
             Server.app.use(appRoutes)
-
+            // error handler
+            Server.app.use(errorHandler)
             return Server.app
         } catch (error) {
             logger.error(error)
