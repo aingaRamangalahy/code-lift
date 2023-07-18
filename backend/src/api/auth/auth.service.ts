@@ -2,6 +2,7 @@ import { Service } from 'typedi'
 import { ErrorResponse } from '@core/utils'
 import { UserRepository } from '@api/user/user.repository'
 import User from '@api/user/user.model'
+import { IUserDocument } from '@api/user/user.interface'
 
 @Service()
 export default class AuthService {
@@ -40,7 +41,7 @@ export default class AuthService {
 
             user.connected = true
             user.save({ validateBeforeSave: false })
-            return user
+            return this.generateResponseToken(user)
             
         } catch (error) {
             throw error
@@ -58,7 +59,7 @@ export default class AuthService {
                 role,
             })
 
-            return user
+            return this.generateResponseToken(user);
         } catch (error) {
             throw error
         }
@@ -74,6 +75,22 @@ export default class AuthService {
         return {
             success: true,
             data: user,
+        }
+    }
+
+    generateResponseToken = (user: IUserDocument) => {
+        // generate token
+        const token = user.generateToken()
+        const data = {
+            _id: user._id,
+            role: user.role,
+            email: user.email,
+            name: user.name,
+        }
+        return {
+            success: true,
+            data,
+            token,
         }
     }
 }

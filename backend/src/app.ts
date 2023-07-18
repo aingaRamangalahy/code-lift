@@ -6,7 +6,6 @@ import { Express } from 'express'
 import Server from "./server";
 import { PORT, API_URL } from "./config";
 import { connectDatabase } from "@core/database";
-import { errorHandler } from '@core/middlewares/errorHandler';
 import { logger } from '@config/logger';
 
 const appPort = PORT || 5000
@@ -19,13 +18,10 @@ const bootstrapApplication = async (app: Express) => {
     });
   } catch (error) {
     logger.error(error)
-    throw error
+    process.exit(1)
   }
 
 }
 const app = Server.getServer();
 bootstrapApplication(app);
-
-// error handler
-app.use(errorHandler)
 

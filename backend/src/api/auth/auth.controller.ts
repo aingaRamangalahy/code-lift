@@ -11,15 +11,15 @@ class AuthController {
     constructor() {}
     signin = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const user = await this.authService.singin(req.body)
-            this.sendTokenResponse(user, res)
+            const response = await this.authService.singin(req.body)
+            res.status(200).json(response)
         }
     )
 
     signup = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const user = await this.authService.signup(req.body)
-            this.sendTokenResponse(user, res)
+            const response = await this.authService.signup(req.body)
+            res.status(200).json(response)
         }
     )
 
@@ -29,22 +29,6 @@ class AuthController {
             res.status(200).json(response)
         }
     )
-
-    sendTokenResponse = (user: IUserDocument, res: Response) => {
-        // generate token
-        const token = user.generateToken()
-        const body = {
-            _id: user._id,
-            role: user.role,
-            email: user.email,
-            name: user.name,
-        }
-        res.status(200).json({
-            success: true,
-            body,
-            token,
-        })
-    }
 }
 
 export default new AuthController()

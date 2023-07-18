@@ -14,7 +14,8 @@
         "@config/*": ["./config/*"],
         "@api/*": ["./api/*"],
       },
+      "types": ["jest", "node"],
     },
-    "include": ["src/**/*", "setupTests.ts"],
+    "include": ["src/**/*", "setupTests.ts", "__tests__/user/user.test.ts"],
     "exclude": ["node_modules", "cli"]
 }
