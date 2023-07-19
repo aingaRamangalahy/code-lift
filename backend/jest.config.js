@@ -11,6 +11,7 @@ module.exports = {
       // Add more path aliases if needed
     },
     setupFilesAfterEnv: ['./jest.setup.ts'],
+    verbose: true,
 
     // setupFiles: ['./setupTests.ts'],
   
