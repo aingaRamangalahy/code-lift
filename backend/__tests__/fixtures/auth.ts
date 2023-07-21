@@ -13,7 +13,7 @@ const authFixture = {
               data: {
                   name: 'test',
                   email: 'test@test.com',
-                  role: 'sender',
+                  role: 'publisher',
               },
               token: 'sample-token',
             },
@@ -41,7 +41,7 @@ const authFixture = {
                 name: 'test',
                 email: 'test@test.com',
                 password: 'azertY',
-                role: 'sender',
+                role: 'publisher',
             },
         },
         response: {
@@ -51,7 +51,7 @@ const authFixture = {
                 data: {
                     name: 'test',
                     email: 'test@test.com',
-                    role: 'sender',
+                    role: 'publisher',
                 },
                 token: 'sample-token',
             },

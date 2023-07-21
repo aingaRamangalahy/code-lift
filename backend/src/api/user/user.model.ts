@@ -23,7 +23,7 @@ let UserSchema = new Schema<IUserDocument>(
         },
         role: {
             type: String,
-            enum: ['user', 'sender'],
+            enum: ['user', 'publisher'],
             default: 'user',
         },
         password: {
