@@ -1,11 +1,12 @@
-import * as mongoose from 'mongoose'
-import * as bcrypt from 'bcrypt'
-import * as jwt from 'jsonwebtoken'
+import crypto from 'crypto';
+import * as mongoose from 'mongoose';
+import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
 
-import { IUser, IUserDocument } from './user.interface'
-import { JWT_SECRET, JWT_EXPIRE } from '@config/index'
+import { IUser, IUserDocument } from './user.interface';
+import { JWT_SECRET, JWT_EXPIRE } from '@config/index';
 
-let Schema = mongoose.Schema
+let Schema = mongoose.Schema;
 let UserSchema = new Schema<IUserDocument>(
     {
         name: {
@@ -49,23 +50,25 @@ let UserSchema = new Schema<IUserDocument>(
             required: true,
             default: false,
         },
+        resetPasswordToken: String,
+        resetPasswordExpire: Date,
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, required: false },
     },
     { _id: true }
-)
+);
 
 /**
  * Crypt user password before save
  */
 UserSchema.pre<IUserDocument>('save', async function (next: Function) {
     if (!this.isModified('password')) {
-        next()
+        next();
     }
 
-    const salt = await bcrypt.genSalt(10)
-    this.password = await bcrypt.hash(this.password, salt)
-})
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+});
 
 /**
  * generate a jwt token
@@ -79,8 +82,8 @@ UserSchema.methods.generateToken = function (this: IUserDocument) {
         },
         JWT_SECRET,
         { expiresIn: JWT_EXPIRE }
-    )
-}
+    );
+};
 
 /**
  * match database password with user input
@@ -90,7 +93,22 @@ UserSchema.methods.matchPassword = async function (
     this: IUserDocument,
     inputPassword: string
 ) {
-    return await bcrypt.compare(inputPassword, this.password)
-}
+    return await bcrypt.compare(inputPassword, this.password);
+};
 
-export default mongoose.model<IUserDocument>('User', UserSchema)
+/**
+ * generate reset password token
+ * @return string
+ */
+
+UserSchema.methods.generateResetPasswordToken = function (this: IUserDocument) {
+    const resetToken = crypto.randomBytes(20).toString("hex");
+    this.resetPasswordToken = crypto
+        .createHash("sha256")
+        .update(resetToken)
+        .digest("hex");
+    this.resetPasswordExpire = Date.now() + 10 * 60 * 1000 // in 10 minutes
+    return resetToken;
+};
+
+export default mongoose.model<IUserDocument>('User', UserSchema);

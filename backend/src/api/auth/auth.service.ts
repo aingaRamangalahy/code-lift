@@ -1,8 +1,10 @@
+import  crypto from "crypto";
 import { Service } from 'typedi';
 import { ErrorResponse } from '@core/utils';
 import { UserRepository } from '@api/user/user.repository';
 import User from '@api/user/user.model';
 import { IUserDocument } from '@api/user/user.interface';
+import { API_URL } from '@config/index';
 
 @Service()
 export default class AuthService {
@@ -39,8 +41,10 @@ export default class AuthService {
                 throw new ErrorResponse('Wrong password', 401);
             }
 
-            user.connected = true;
-            user.save({ validateBeforeSave: false });
+            this.userRepository.updateUser(user._id, {
+                ...user,
+                connected: true,
+            } as IUserDocument);
             return this.generateResponseToken(user);
         } catch (error) {
             throw error;
@@ -66,16 +70,67 @@ export default class AuthService {
 
     signout = async (id: string) => {
         const user = await this.userRepository.findById(id);
-
-        user.connected = false;
-
-        user.save({ validateBeforeSave: false });
-
+        this.userRepository.updateUser(user._id, {
+            ...user,
+            connected: false,
+        } as IUserDocument);
         return {
             success: true,
             data: user,
         };
     };
+
+    forgotPassword = async (email: string) => {
+        const user = await this.userRepository.findOne({ email })
+        
+        if (!user) {
+            throw new ErrorResponse('User not found', 404);
+        }
+        
+        const resetToken = user.generateResetPasswordToken();
+        await user.save({ validateBeforeSave: false });
+        const resetUrl = `${API_URL}/api/auth/reset-passwrod/${resetToken}`;
+        try {
+            //await sendResetPasswordEmail(email, token); TODO: implementation of the email function
+            return {
+                success: true,
+                data: {
+                    resetUrl,
+                },
+            }
+        } catch (error) {
+            this.userRepository.updateUser(user._id, {
+                ...user,
+                resetPasswordToken: undefined,
+                resetPasswordExpire: undefined,
+            } as IUserDocument);
+            throw new ErrorResponse('Email not sent', 500)
+        }
+
+    }
+
+    resetPassword = async (password: string, token: string) => {
+        const resetPasswordToken = crypto
+            .createHash("sha256")
+            .update(token)
+            .digest("hex")
+        const user = await this.userRepository.findOne({
+            resetPasswordToken,
+            resetPasswordExpire: { $gt: Date.now() }
+        });
+        if (!user) {
+            throw new ErrorResponse('Invalide token', 400)
+        }
+
+        this.userRepository.updateUser(user._id, {
+            ...user,
+            password,
+            resetPasswordToken:undefined,
+            resetPasswordExpire: undefined,
+        } as IUserDocument)
+
+        return this.generateResponseToken(user);
+    }
 
     generateResponseToken = (user: IUserDocument) => {
         // generate token
