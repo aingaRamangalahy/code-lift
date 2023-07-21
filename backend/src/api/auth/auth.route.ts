@@ -10,8 +10,8 @@ class AuthRouter {
 
     routes() {
         // POST
-        this.router.post('/signin', authController.signin)
-        this.router.post('/signup', authController.signup)
+        this.router.post('/login', authController.login)
+        this.router.post('/register', authController.register)
         this.router.post('/signout', authController.signout)
     }
 }

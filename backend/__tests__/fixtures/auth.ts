@@ -1,5 +1,5 @@
 const authFixture = {
-    signinSuccess: {
+    loginSuccess: {
         request: {
             body: {
                 email: 'test@test.com',
@@ -19,7 +19,7 @@ const authFixture = {
             },
         },
     },
-    signinFailure: {
+    loginFailure: {
         request: {
             body: {
                 email: 'test@test.com',
@@ -35,7 +35,7 @@ const authFixture = {
         },
     },
 
-    signupSuccess: {
+    registerSuccess: {
         request: {
             body: {
                 name: 'test',
@@ -57,7 +57,7 @@ const authFixture = {
             },
         },
     },
-    signupError: {
+    registerError: {
         request: {
             body: {
                 name: 'test',

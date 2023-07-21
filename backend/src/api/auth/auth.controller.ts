@@ -9,16 +9,16 @@ class AuthController {
     private readonly authService: AuthService = Container.get(AuthService)
 
     constructor() {}
-    signin = asyncHandler(
+    login = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
             const response = await this.authService.singin(req.body)
             res.status(200).json(response)
         }
     )
 
-    signup = asyncHandler(
+    register = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const response = await this.authService.signup(req.body)
+            const response = await this.authService.register(req.body)
             res.status(200).json(response)
         }
     )

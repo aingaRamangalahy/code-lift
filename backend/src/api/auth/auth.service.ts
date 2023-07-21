@@ -48,7 +48,7 @@ export default class AuthService {
         }
     }
 
-    signup = async (userPayload) => {
+    register = async (userPayload) => {
         try {
             const { name, email, password, role } = userPayload
 
