@@ -2,7 +2,7 @@ import { Service } from "typedi";
 import { I{{ className }}Document } from "./{{ fileName }}.interface";
 import {{ className }} from "./{{ fileName }}.model";
 import { ErrorResponse } from "@core/utils";
-import { {{ className }}Repository } from "./{{ fileName }}.repository.mustache";
+import { {{ className }}Repository } from "./{{ fileName }}.repository";
 
 @Service()
 export default class {{ className }}Service {

@@ -1,12 +1,11 @@
 import crypto from 'crypto';
-import * as mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 
-import { IUser, IUserDocument } from './user.interface';
+import { IUserDocument } from './user.interface';
 import { JWT_SECRET, JWT_EXPIRE } from '@config/index';
 
-let Schema = mongoose.Schema;
 let UserSchema = new Schema<IUserDocument>(
     {
         name: {
@@ -24,7 +23,7 @@ let UserSchema = new Schema<IUserDocument>(
         },
         role: {
             type: String,
-            enum: ['user', 'publisher'],
+            enum: ['user', 'publisher', 'admin'],
             default: 'user',
         },
         password: {
@@ -102,13 +101,13 @@ UserSchema.methods.matchPassword = async function (
  */
 
 UserSchema.methods.generateResetPasswordToken = function (this: IUserDocument) {
-    const resetToken = crypto.randomBytes(20).toString("hex");
+    const resetToken = crypto.randomBytes(20).toString('hex');
     this.resetPasswordToken = crypto
-        .createHash("sha256")
+        .createHash('sha256')
         .update(resetToken)
-        .digest("hex");
-    this.resetPasswordExpire = Date.now() + 10 * 60 * 1000 // in 10 minutes
+        .digest('hex');
+    this.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // in 10 minutes
     return resetToken;
 };
 
-export default mongoose.model<IUserDocument>('User', UserSchema);
+export default model<IUserDocument>('User', UserSchema);

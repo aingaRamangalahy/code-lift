@@ -11,7 +11,7 @@ class AuthController {
     constructor() {}
     login = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const response = await this.authService.singin(req.body);
+            const response = await this.authService.login(req.body);
             res.status(200).json(response);
         }
     );
@@ -43,9 +43,9 @@ class AuthController {
         }
     )
 
-    signout = asyncHandler(
+    logout = asyncHandler(
         async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-            const response = await this.authService.signout(req.body.id);
+            const response = await this.authService.logout(req.body.id);
             res.status(200).json(response);
         }
     );

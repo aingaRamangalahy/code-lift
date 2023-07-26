@@ -14,7 +14,7 @@ export default class AuthService {
         this.userRepository = new UserRepository(User);
     }
 
-    singin = async (credentials) => {
+    login = async (credentials) => {
         try {
             const { email, password } = credentials;
 
@@ -41,8 +41,7 @@ export default class AuthService {
                 throw new ErrorResponse('Wrong password', 401);
             }
 
-            this.userRepository.updateUser(user._id, {
-                ...user,
+            await this.userRepository.updateUser(user._id, {
                 connected: true,
             } as IUserDocument);
             return this.generateResponseToken(user);
@@ -68,10 +67,9 @@ export default class AuthService {
         }
     };
 
-    signout = async (id: string) => {
+    logout = async (id: string) => {
         const user = await this.userRepository.findById(id);
-        this.userRepository.updateUser(user._id, {
-            ...user,
+        await this.userRepository.updateUser(user._id, {
             connected: false,
         } as IUserDocument);
         return {
@@ -99,8 +97,7 @@ export default class AuthService {
                 },
             }
         } catch (error) {
-            this.userRepository.updateUser(user._id, {
-                ...user,
+            await this.userRepository.updateUser(user._id, {
                 resetPasswordToken: undefined,
                 resetPasswordExpire: undefined,
             } as IUserDocument);
@@ -122,8 +119,7 @@ export default class AuthService {
             throw new ErrorResponse('Invalide token', 400)
         }
 
-        this.userRepository.updateUser(user._id, {
-            ...user,
+        await this.userRepository.updateUser(user._id, {
             password,
             resetPasswordToken:undefined,
             resetPasswordExpire: undefined,
