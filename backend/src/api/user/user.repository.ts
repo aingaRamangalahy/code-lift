@@ -1,5 +1,6 @@
 import { IUserDocument } from "./user.interface";
 import { BaseRepository } from "@core/repositories";
+import { IFindPayload } from "@core/interfaces";
 
 export class UserRepository extends BaseRepository<IUserDocument> {
   addUser = (user: any) => {
@@ -10,8 +11,8 @@ export class UserRepository extends BaseRepository<IUserDocument> {
     return this.find();
   };
 
-  getOneUser = (options: any, additionalField?: string) => {
-    return this.findOne(options, additionalField);
+  getOneUser = (payload:IFindPayload) => {
+    return this.findOne(payload);
   };
 
   getUserById = (id: string) => {

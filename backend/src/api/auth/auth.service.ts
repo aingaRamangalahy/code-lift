@@ -5,6 +5,7 @@ import { UserRepository } from '@api/user/user.repository';
 import User from '@api/user/user.model';
 import { IUserDocument } from '@api/user/user.interface';
 import { API_URL } from '@config/index';
+import { IFindPayload } from "@core/interfaces";
 
 @Service()
 export default class AuthService {
@@ -22,10 +23,11 @@ export default class AuthService {
                 throw new ErrorResponse('Invalid email or password', 400);
             }
 
-            const user = await this.userRepository.getOneUser(
-                { email },
-                'password'
-            );
+            const getUserPayload: IFindPayload = {
+                filter: { email },
+                additionalField: 'password',
+            } 
+            const user = await this.userRepository.getOneUser(getUserPayload)
 
             if (!user) {
                 throw new ErrorResponse(
@@ -79,7 +81,7 @@ export default class AuthService {
     };
 
     forgotPassword = async (email: string) => {
-        const user = await this.userRepository.findOne({ email })
+        const user = await this.userRepository.findOne({ filter: { email } })
         
         if (!user) {
             throw new ErrorResponse('User not found', 404);
@@ -111,10 +113,13 @@ export default class AuthService {
             .createHash("sha256")
             .update(token)
             .digest("hex")
-        const user = await this.userRepository.findOne({
-            resetPasswordToken,
-            resetPasswordExpire: { $gt: Date.now() }
-        });
+        const getUserPayload = {
+            filter: {
+                resetPasswordToken,
+                resetPasswordExpire: { $gt: Date.now() }
+            }
+        }
+        const user = await this.userRepository.findOne(getUserPayload);
         if (!user) {
             throw new ErrorResponse('Invalide token', 400)
         }

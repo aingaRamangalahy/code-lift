@@ -1,5 +1,6 @@
 import { ITopicDocument } from "./topic.interface";
 import { BaseRepository } from "@core/repositories";
+import { IFindPayload } from "@core/interfaces";
 
 export class TopicRepository extends BaseRepository<ITopicDocument> {
   addTopic = (topic: any) => {
@@ -10,8 +11,8 @@ export class TopicRepository extends BaseRepository<ITopicDocument> {
     return this.find();
   };
 
-  getOneTopic = (options: any, additionalField?: string) => {
-    return this.findOne(options, additionalField);
+  getOneTopic = (payload: IFindPayload) => {
+    return this.findOne(payload);
   };
 
   getTopicById = (id: string) => {

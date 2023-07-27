@@ -146,6 +146,7 @@ The API will support user authentication using JWT (JSON Web Tokens). Users will
    - Description: Create a new category.
    - Request Body:
      - `name` (string, required): The name of the category.
+     - `topics`(liste of string): The id of the categories topics
    - Authorization: Required (JWT token).
    - Response: Returns the created category details.
 

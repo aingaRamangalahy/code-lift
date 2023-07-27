@@ -1,5 +1,6 @@
 import { I{{ className }}Document } from "./{{ fileName }}.interface";
 import { BaseRepository } from "@core/repositories";
+import { IFindPayload } from "@core/interfaces";
 
 export class {{ className }}Repository extends BaseRepository<I{{ className }}Document> {
   add{{ className }} = ({{ fileName }}: any) => {
@@ -10,8 +11,8 @@ export class {{ className }}Repository extends BaseRepository<I{{ className }}Do
     return this.find();
   };
 
-  getOne{{ className }} = (options: any, additionalField?: string) => {
-    return this.findOne(options, additionalField);
+  getOne{{ className }} = (payload: IFindPayload) => {
+    return this.findOne(payload);
   };
 
   get{{ className }}ById = (id: string) => {
