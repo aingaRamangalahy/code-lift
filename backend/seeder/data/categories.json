@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Frontend Development",
+    "topics": ["615ae0a87df3a8abc1234567", "615ae0a87df3a8abc1234568", "615ae0a87df3a8abc1234569"],
+    "createdAt": "2023-07-28T08:00:00.000Z",
+    "updatedAt": "2023-07-28T12:34:56.789Z"
+  },
+  {
+    "name": "Backend Development",
+    "topics": ["615ae0a87df3a8abc123456a", "615ae0a87df3a8abc123456b", "615ae0a87df3a8abc123456c"],
+    "createdAt": "2023-07-28T09:30:15.000Z",
+    "updatedAt": "2023-07-28T15:45:00.000Z"
+  },
+  {
+    "name": "Object-Oriented Programming",
+    "topics": ["615ae0a87df3a8abc123456d", "615ae0a87df3a8abc123456e", "615ae0a87df3a8abc123456f"],
+    "createdAt": "2023-07-28T12:00:00.000Z",
+    "updatedAt": "2023-07-28T14:20:30.000Z"
+  },
+  {
+    "name": "Database Management",
+    "topics": ["615ae0a87df3a8abc1234570", "615ae0a87df3a8abc1234571", "615ae0a87df3a8abc1234572"],
+    "createdAt": "2023-07-28T14:30:00.000Z",
+    "updatedAt": "2023-07-28T16:45:00.000Z"
+  },
+  {
+    "name": "Mobile App Development",
+    "topics": ["615ae0a87df3a8abc1234573", "615ae0a87df3a8abc1234574", "615ae0a87df3a8abc1234575"],
+    "createdAt": "2023-07-28T16:00:00.000Z",
+    "updatedAt": "2023-07-28T18:10:30.000Z"
+  }
+]
