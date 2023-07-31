@@ -9,6 +9,11 @@ export const options = yargs(hideBin(process.argv))
         describe: 'Drop collections before seeding',
         type: 'boolean',
     })
+    .option('all', {
+        alias: 'a',
+        describe: 'Seed all collections',
+        type: 'boolean',
+    })
     .option('users', {
         alias: 'u',
         describe: 'Seed only users data',

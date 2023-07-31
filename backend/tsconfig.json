@@ -19,8 +19,8 @@
     "include": [
         "src/**/*",
         "setupTests.ts",
-        "__tests__/user/user.test.ts",
-        "seeder/**/*.ts",
+        "__tests__/user/user.test.ts", 
+        "seeder",
     ],
     "exclude": ["node_modules", "cli"]
 }

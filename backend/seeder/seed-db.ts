@@ -1,42 +1,44 @@
-// import mongoose from 'mongoose';
-// import { IUser } from '@api/user/user.interface';
-// import { ITopic } from '@api/topic/topic.interface';
-// import userModel from '@api/user/user.model';
-// import topicModel from '@api/topic/topic.model';
-// import { DB_URI } from '@config/index';
+import mongoose from 'mongoose';
+
+import userModel from '@api/user/user.model';
+import topicModel from '@api/topic/topic.model';
+import categoryModel from '@api/category/category.model';
+import resourceModel from '@api/resource/resource.model';
+
+import { DB_URI } from '@config/index';
 import { options } from './options';
 import { users, categories, resources, topics } from './data';
+
+
+const dbActions = {
+  users: async () => await userModel.insertMany(users),
+  categories: async() => await categoryModel.insertMany(categories),
+  resoures: async() =>  await resourceModel.insertMany(resources),
+  topics: async () => await topicModel.insertMany(topics),
+}
 
 async function seedDB() {
   try {
     console.log('options', options)
-    // await mongoose.connect(DB_URI);
+    await mongoose.connect(DB_URI);
 
-    // console.log('Connected to the database.');
+    console.log('Seeder connected to the database.');
+    const actionList = Object.keys(dbActions);
 
-    // // Drop collections if needed
-    if (options.drop) {
-      console.log('drop option')
-      // await userModel.collection.drop();
-      // await topicModel.collection.drop();
+    for (const [key, value] of Object.entries(options)) {
+      if (typeof value === "boolean" && value && actionList.includes(key)) {
+        const action = dbActions[key];
+        console.log('seeding::', key, value, action)
+        await action();
+        console.log('action', action)
+        console.log('seeding done', key)
+      }
     }
 
-    if (options.users) {
-      console.log('drop or seed user')
-    }
-
-    // // Seed users
-    // await userModel.insertMany(users as IUser[]);
-    // console.log('Users seeded successfully.');
-
-    // // Seed topics
-    // await topicModel.insertMany(topics as ITopic[]);
-    // console.log('Topics seeded successfully.');
-
-    // mongoose.disconnect();
-    // console.log('Disconnected from the database.');
   } catch (error) {
     console.error('Error seeding the database:', error);
+  } finally {
+    await mongoose.disconnect()
   }
 }
 

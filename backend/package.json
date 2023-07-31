@@ -8,7 +8,7 @@
     "dev": "NODE_ENV=development & ts-node-dev --respawn -r tsconfig-paths/register src/app.ts",
     "prod": "NODE_ENV=development & npm run build && npm run start",
     "generate": "node cli/cli.js",
-    "seeder": "ts-node-dev seeder/seed-db.ts"
+    "seeder": "ts-node-dev -r tsconfig-paths/register seeder/seed-db.ts"
   },
   "keywords": [],
   "author": "Ainga Ramangalahy <aingaramangalahy@gmail.com>",
