@@ -1,9 +1,9 @@
-import { Document } from "mongoose";
+import { Document, ObjectId } from "mongoose";
 export interface IComment {
   content: string;
-  resource: string;
-  user: string;
-  parentComment?: string
+  resource: string | ObjectId;
+  user: string | ObjectId;
+  parentComment?: string | ObjectId
   createdAt?: Date;
   updatedAt?: Date;
 }

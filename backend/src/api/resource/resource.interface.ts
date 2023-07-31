@@ -1,8 +1,8 @@
-import { Document } from "mongoose";
+import { Document, ObjectId } from "mongoose";
 export interface IResource {
   title: string;
   description: string;
-  publisher: String;
+  publisher: string | ObjectId;
   url: string;
   type?: string;
   difficulty?: string;

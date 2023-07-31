@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose"
-import { IComment, ICommentDocument } from "./comment.interface";
+import { ICommentDocument } from "./comment.interface";
 
 
 let CommentSchema = new Schema<ICommentDocument>(
