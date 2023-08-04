@@ -8,7 +8,7 @@ export async function connectDatabase() {
     await mongoose.connect(DB_URI);
     logger.info('Database connected...');
   } catch (error) {
-    logger.error(new Error('Database connection error'));
+    logger.error(new Error('Database connection error' + error));
     process.exit(1);
   }
 }

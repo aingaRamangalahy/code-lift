@@ -1,5 +1,7 @@
  // required by typedi for the usage of decorators or dependency injection
 import 'reflect-metadata';
+// registering path
+import 'module-alias/register';
 
 
 import { Express } from 'express'

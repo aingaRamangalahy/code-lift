@@ -3,3 +3,4 @@
 .env
 /backend_logs
 /coverage
+/build
