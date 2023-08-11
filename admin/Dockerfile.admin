@@ -1,4 +1,5 @@
-FROM node:18.10-alpine3.15
+# Stage 1: Build the Angular app
+FROM node:18.10-alpine3.15 AS build
 
 WORKDIR /app
 
@@ -8,8 +9,14 @@ RUN npm ci
 
 COPY . .
 
-RUN rm -rf ./dist && npm run build
+RUN rm -rf ./dist && npm run build --prod
 
-EXPOSE 4200
+# Stage 2: Create a lightweight image with Nginx to serve the Angular app
+FROM nginx:alpine
 
-CMD [ "npm", "start" ]
+# Copy the built Nuxt app from the previous stage to Nginx directory
+COPY --from=build /app/dist /usr/share/nginx/html
+# Expose port 80 for Nginx
+EXPOSE 80
+# Start Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
