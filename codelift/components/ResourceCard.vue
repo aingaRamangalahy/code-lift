@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-sm bg-gray-10 dark:bg-gray-900 shadow-md rounded-md m-4 p-4 hover:cursor-pointer">
+  <div class="w-sm min-w-min bg-slate-10 dark:bg-slate-900 shadow-md rounded-md m-4 p-4 hover:cursor-pointer">
     <!-- Header -->
     <div class="flex items-center">
       <img
@@ -15,7 +15,7 @@
       {{ resource?.title }}
     </h2>
     <!-- Description-->
-    <p class="my-2 text-gray-500 dark:text-gray-400">
+    <p class="my-2 text-slate-500 dark:text-slate-400">
       {{ resource?.description }}
     </p>
     <!-- Resource Image -->
@@ -27,7 +27,7 @@
       <div class="flex items-center">
         <button
           class="text-lift-text-secondary dark:text-lift-dark-text-secondary hover:text-lift-accent dark:hover:text-lift-text-accent transition duration-300">
-          <SvgoChevronDoubleUp />
+          <SvgoChevronDoubleUp  />
         </button>
         <p class="ml-2 text-lift-text-secondary dark:text-lift-dark-text-secondary">25 Upvotes</p>
       </div>

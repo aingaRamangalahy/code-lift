@@ -1,6 +1,6 @@
 <template>
-  <div class="relative mx-auto w-full">
-    <div class="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
+  <div class="@container relative mx-auto w-full">
+    <div class="grid gap-1 @md:gap-2 @lg:gap-4 @xs:grid-cols-1 @sm:grid-cols-2 @md:grid-cols-3 @xl:grid-cols-4 ">
       <ResourceCard v-for="(resourceItem, index) in resourcesItems" :key="index" :resource="resourceItem" />
     </div>
   </div>

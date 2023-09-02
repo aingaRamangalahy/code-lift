@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    runtimeConfig: {
+        API_BASE_URL: process.env.API_URL
+    },
     devtools: { enabled: true },
     components: [
         { path: '~/components/layouts', pathPrefix: false },
@@ -12,12 +15,13 @@ export default defineNuxtConfig({
         '@nuxtjs/color-mode',
         '@element-plus/nuxt',
         'nuxt-svgo',
+        '@pinia/nuxt',
         // 'nuxt-icon',
     ],
     svgo: {
         // global: false,
-        defaultImport: 'component',
-        customComponent: 'SharedIcon'
+        // defaultImport: 'component',
+        customComponent: 'BaseIcon'
     },
     tailwindcss: {
         cssPath: '~/assets/css/tailwind.css',

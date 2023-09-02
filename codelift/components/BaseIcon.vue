@@ -3,7 +3,7 @@
     :is="icon"
     :class="{
       'nuxt-icon': fontControlled,
-      'nuxt-icon--fill': !filled
+      'nuxt-icon--fill': filled
     }"
   />
 </template>

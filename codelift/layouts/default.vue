@@ -5,6 +5,7 @@
       <slot />
     </main>
     <!-- <Footer /> -->
+    <DialogResourceAdd />
   </div>
 </template>
 <script setup>

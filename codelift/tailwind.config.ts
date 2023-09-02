@@ -4,7 +4,15 @@ export default {
   content: [],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      containers: {
+        'sm': '40rem',
+        'md': '48rem',
+        'lg': '64rem',
+        'xl': '80rem',
+        '2xl': '96rem',
+      },
+    },
     screens: {
       // from daily.dev tailwind config
       mobileL: '420px',
@@ -23,13 +31,15 @@ export default {
       rank: '3',
       header: '4',
       sidebar: '9',
-      modal: '10',
+      dialog: '10',
       max: '100',
       '-1': '-1',
     },
-    width: {
-      70: '17.5rem',
-    },
+    // width: {
+    //   70: '17.5rem',
+    // },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/container-queries'),
+  ],
 } satisfies Config
