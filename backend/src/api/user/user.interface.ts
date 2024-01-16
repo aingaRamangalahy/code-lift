@@ -11,9 +11,12 @@ export interface IUser {
     about: string;
     createdAt: Date;
     updatedAt?: Date;
+    resetPasswordToken?: String,
+    resetPasswordExpire?: number,
 }
 
 export interface IUserDocument extends IUser, Document {
     generateToken(): string;
+    generateResetPasswordToken(): string;
     matchPassword: (password: string) => Promise<boolean>;
 }

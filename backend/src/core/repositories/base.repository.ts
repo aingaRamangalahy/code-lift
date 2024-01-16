@@ -1,41 +1,73 @@
-import { IDatabase } from "@core/interfaces";
+import { IDatabase, IFindPayload } from "@core/interfaces";
+import { filter } from "async";
 import { Model } from "mongoose";
 
 export abstract class BaseRepository<T> implements IDatabase<T> {
   constructor(private model: Model<T>) {}
 
-  async find(payload?: any): Promise<T[]> {
-    return this.model.find(payload);
-  }
-
-  async findOne(payload: any, additionalField?: string): Promise<T> {
-    const query = this.model.findOne(payload);
+  find(payload: IFindPayload = {}): Promise<T[]> {
+    const { filter = {}, populateFields = [], additionalField } = payload;
+    const query = this.model.find(filter);
+    if (populateFields.length > 0) {
+      query.populate(populateFields.join(','))
+    }
     if (additionalField) {
       query.select(`${additionalField ? "+" + additionalField : ""}`);
     }
     return query.exec();
   }
 
-  async findById(id: string): Promise<T> {
-    return this.model.findById(id);
+  findOne(payload: IFindPayload = {}): Promise<T> {
+    const { filter = {}, populateFields = [], additionalField } = payload;
+    const query = this.model.findOne(filter);
+    if (populateFields.length > 0) {
+      query.populate(populateFields.join(','))
+    }
+    if (additionalField) {
+      query.select(`${additionalField ? "+" + additionalField : ""}`);
+    }
+    return query.exec();
   }
 
-  async create(payload: T): Promise<T> {
-    return this.model.create(payload);
+  findById(id: string, populateFields = []): Promise<T> {
+    const query = this.model.findById(id);
+    if (populateFields.length > 0) {
+      query.populate(populateFields.join(','))
+    }
+    return query.exec();
   }
 
-  async update(id: string, payload: T): Promise<T> {
-    return this.model.findByIdAndUpdate(id, payload, {
+  create(data: T): Promise<T> {
+    return this.model.create(data);
+  }
+
+  update(id: string, data: T, populateFields = []): Promise<T> {
+    const query = this.model.findByIdAndUpdate(id, data, {
       new: true,
       runValidators: true,
     });
+    if (populateFields.length > 0) {
+      query.populate(populateFields.join(','))
+    }
+    return query.exec();
   }
 
-  async delete(id: string): Promise<T> {
+  updateOne(filter: any, data: T, populateFields = []): Promise<T> {
+    const query = this.model.findOneAndUpdate(filter, data, {
+      new: true,
+      runValidators: true,
+    });
+    if (populateFields.length > 0) {
+      query.populate(populateFields.join(','))
+    }
+    return query.exec();
+  }
+
+  delete(id: string): Promise<T> {
     return this.model.findByIdAndDelete(id);
   }
 
-  async countDocuments() {
+  countDocuments() {
     return this.model.countDocuments();
   }
 

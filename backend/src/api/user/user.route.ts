@@ -1,6 +1,6 @@
-import { Router } from "express";
-import UserController from "./user.controller";
-import { auth } from "@core/middlewares";
+import { Router } from 'express';
+import UserController from './user.controller';
+import { auth } from '@core/middlewares';
 class UserRouter {
     router: Router;
 
@@ -11,32 +11,37 @@ class UserRouter {
 
     routes() {
         // GET
-        this.router.get("/:id", UserController.getUser);
+        this.router.get('/:id', UserController.getUser);
         this.router.get(
-            "",
-            // auth.protectRoute,
-            // auth.authorizedRoles("admin"),
+            '',
+            auth.protectRoute,
+            auth.authorizedRoles('admin', 'super-admin'),
             UserController.getUsers
         );
 
         // POST
         this.router.post(
-            "",
+            '',
             auth.protectRoute,
-            auth.authorizedRoles("admin"),
+            auth.authorizedRoles('admin', 'super-admin'),
             UserController.createUser
         );
 
         // DELETE
         this.router.delete(
-            "/:id",
+            '/:id',
             auth.protectRoute,
-            auth.authorizedRoles("admin"),
+            auth.authorizedRoles('super-admin'),
             UserController.deleteUser
         );
 
         // PUT
-        this.router.put("/:id", auth.protectRoute, UserController.updateUser);
+        this.router.put(
+            '/:id',
+            auth.protectRoute,
+            auth.authorizedRoles('admin', 'super-admin'),
+            UserController.updateUser
+        );
     }
 }
 

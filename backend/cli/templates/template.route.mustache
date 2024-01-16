@@ -1,0 +1,28 @@
+import { Router } from "express";
+import {{ className }}Controller from "./{{ fileName }}.controller";
+import { auth } from "@core/middlewares";
+class {{ className }}Router {
+  router: Router;
+
+  constructor() {
+    this.router = Router();
+    this.routes();
+  }
+
+  routes() {
+    // GET
+    this.router.get("/:id", {{ className }}Controller.get{{ className }});
+    this.router.get("", {{ className }}Controller.get{{ className }}s);
+
+    // POST
+    this.router.post("", {{ className }}Controller.create{{ className }});
+
+    // DELETE
+    this.router.delete("/:id", {{ className }}Controller.delete{{ className }});
+
+    // PUT
+    this.router.put("/:id", {{ className }}Controller.update{{ className }});
+  }
+}
+
+export default new {{ className }}Router().router;

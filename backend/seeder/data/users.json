@@ -1,0 +1,118 @@
+[
+  {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "role": "user",
+    "password": "hashed_password_1",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/john.jpg",
+    "about": "I am a software engineer.",
+    "createdAt": "2023-07-28T00:00:00.000Z",
+    "updatedAt": "2023-07-28T12:34:56.789Z",
+    "resetPasswordToken": "random_token_1",
+    "resetPasswordExpire": 1679123456
+  },
+  {
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "role": "admin",
+    "password": "hashed_password_2",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/jane.jpg",
+    "about": "I love coding and design.",
+    "createdAt": "2023-07-28T01:23:45.678Z",
+    "updatedAt": "2023-07-28T15:45:00.000Z",
+    "resetPasswordToken": "random_token_2",
+    "resetPasswordExpire": 1679123456
+  },
+  {
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "role": "user",
+    "password": "hashed_password_3",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/alice.jpg",
+    "about": "Web developer and traveler.",
+    "createdAt": "2023-07-28T08:00:00.000Z"
+  },
+  {
+    "name": "Bob Williams",
+    "email": "bob.williams@example.com",
+    "role": "user",
+    "password": "hashed_password_4",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/bob.jpg",
+    "about": "Coffee lover and bookworm.",
+    "createdAt": "2023-07-28T09:30:15.000Z"
+  },
+  {
+    "name": "Eve Brown",
+    "email": "eve.brown@example.com",
+    "role": "user",
+    "password": "hashed_password_5",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/eve.jpg",
+    "about": "Nature enthusiast and photographer.",
+    "createdAt": "2023-07-28T12:00:00.000Z"
+  },
+  {
+    "name": "Michael Lee",
+    "email": "michael.lee@example.com",
+    "role": "user",
+    "password": "hashed_password_6",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/michael.jpg",
+    "about": "Artist and musician.",
+    "createdAt": "2023-07-28T14:20:30.000Z"
+  },
+  {
+    "name": "Sophia Kim",
+    "email": "sophia.kim@example.com",
+    "role": "user",
+    "password": "hashed_password_7",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/sophia.jpg",
+    "about": "Foodie and blogger.",
+    "createdAt": "2023-07-28T16:45:00.000Z"
+  },
+  {
+    "name": "David Miller",
+    "email": "david.miller@example.com",
+    "role": "user",
+    "password": "hashed_password_8",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/david.jpg",
+    "about": "Fitness enthusiast and trainer.",
+    "createdAt": "2023-07-28T18:10:30.000Z"
+  },
+  {
+    "name": "Olivia Wilson",
+    "email": "olivia.wilson@example.com",
+    "role": "user",
+    "password": "hashed_password_9",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/olivia.jpg",
+    "about": "Fashion designer and traveler.",
+    "createdAt": "2023-07-28T21:15:00.000Z"
+  },
+  {
+    "name": "William Davis",
+    "email": "william.davis@example.com",
+    "role": "user",
+    "password": "hashed_password_10",
+    "connected": false,
+    "activated": false,
+    "photo": "https://example.com/william.jpg",
+    "about": "Tech geek and gamer.",
+    "createdAt": "2023-07-28T23:59:59.999Z"
+  }
+]

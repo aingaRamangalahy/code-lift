@@ -1,0 +1,29 @@
+import { I{{ className }}Document } from "./{{ fileName }}.interface";
+import { BaseRepository } from "@core/repositories";
+import { IFindPayload } from "@core/interfaces";
+
+export class {{ className }}Repository extends BaseRepository<I{{ className }}Document> {
+  add{{ className }} = ({{ fileName }}: any) => {
+    return this.create({{ fileName }});
+  };
+
+  get{{ className }}s = () => {
+    return this.find();
+  };
+
+  getOne{{ className }} = (payload: IFindPayload) => {
+    return this.findOne(payload);
+  };
+
+  get{{ className }}ById = (id: string) => {
+    return this.findById(id);
+  };
+
+  update{{ className }} = (id: string, {{ fileName }}: I{{ className }}Document) => {
+    return this.update(id, {{ fileName }});
+  };
+
+  delete{{ className }} = (id: string) => {
+    return this.delete(id);
+  };
+}

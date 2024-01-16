@@ -6,3 +6,10 @@ export interface IDatabase<T> {
   update(id: string, payload: T): Promise<T>;
   delete(id: string): Promise<T>;
 }
+
+export interface IFindPayload {
+  filter?: any;
+  populateFields?: string[];
+  additionalField?: string;
+}
+

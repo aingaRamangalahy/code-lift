@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./codelift
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3003:80"
+    
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile.admin
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - DB_URI=mongodb://mongo:27017/codelift
+    depends_on:
+      - mongo
+    volumes:
+      - mongodb_data:/data/db
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+  
+volumes:
+  mongodb_data:

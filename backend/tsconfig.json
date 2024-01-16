@@ -1,17 +1,26 @@
 {
-  "compilerOptions": {
-      "experimentalDecorators": true,
-      "module": "commonjs",
-      "esModuleInterop": true,
-      "target": "es5",
-      "outDir": "./build",
-      "lib": ["es2015"],
-      "skipLibCheck": true,
-      "baseUrl": "src",
-      "paths": {
-        "@core/*": ["./core/*"],
-        "@config/*": ["./config/*"],
-        "@api/*": ["./api/*"],
-      }
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "target": "es5",
+        "outDir": "./build",
+        "lib": ["es2015"],
+        "skipLibCheck": true,
+        "baseUrl": "src",
+        "paths": {
+            "@core/*": ["./core/*"],
+            "@config/*": ["./config/*"],
+            "@api/*": ["./api/*"]
+        },
+        "types": ["jest", "node"]
     },
+    "include": [
+        "src/**/*",
+        "setupTests.ts",
+        "__tests__/user/user.test.ts",
+        "seeder"
+    ],
+    "exclude": ["node_modules", "cli"]
 }

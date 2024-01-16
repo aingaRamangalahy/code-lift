@@ -1,6 +1,6 @@
 import { Service } from "typedi";
 import { IUserDocument } from "./user.interface";
-import User from "./user.modele";
+import User from "./user.model";
 import { ErrorResponse } from "@core/utils";
 import { UserRepository } from "./user.repository";
 

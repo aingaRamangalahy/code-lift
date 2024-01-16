@@ -1,0 +1,61 @@
+[
+  {
+    "title": "Introduction to React.js",
+    "description": "A beginner's guide to React.js library for building UIs.",
+    "publisher": "615ae0a87df3a8abc1234567",
+    "url": "https://example.com/react-intro",
+    "type": "Article",
+    "difficulty": "Beginner",
+    "vote": 25,
+    "topics": ["615ae0a87df3a8abc1234568", "615ae0a87df3a8abc123456a"],
+    "createdAt": "2023-07-28T08:00:00.000Z",
+    "updatedAt": "2023-07-28T12:34:56.789Z"
+  },
+  {
+    "title": "Node.js Crash Course",
+    "description": "A quick crash course on Node.js for backend development.",
+    "publisher": "615ae0a87df3a8abc1234569",
+    "url": "https://example.com/node-crash-course",
+    "type": "Video",
+    "difficulty": "Intermediate",
+    "vote": 15,
+    "topics": ["615ae0a87df3a8abc123456b", "615ae0a87df3a8abc1234570"],
+    "createdAt": "2023-07-28T09:30:15.000Z",
+    "updatedAt": "2023-07-28T15:45:00.000Z"
+  },
+  {
+    "title": "JavaScript Design Patterns",
+    "description": "Explore common design patterns in JavaScript programming.",
+    "publisher": "615ae0a87df3a8abc1234567",
+    "url": "https://example.com/js-design-patterns",
+    "type": "Book",
+    "vote": 35,
+    "topics": ["615ae0a87df3a8abc123456d", "615ae0a87df3a8abc1234571"],
+    "createdAt": "2023-07-28T12:00:00.000Z",
+    "updatedAt": "2023-07-28T14:20:30.000Z"
+  },
+  {
+    "title": "MongoDB Basics",
+    "description": "Get started with MongoDB, a NoSQL database.",
+    "publisher": "615ae0a87df3a8abc1234572",
+    "url": "https://example.com/mongodb-basics",
+    "type": "Tutorial",
+    "difficulty": "Beginner",
+    "vote": 20,
+    "topics": ["615ae0a87df3a8abc123456d", "615ae0a87df3a8abc1234571"],
+    "createdAt": "2023-07-28T14:30:00.000Z",
+    "updatedAt": "2023-07-28T16:45:00.000Z"
+  },
+  {
+    "title": "Advanced Python Concepts",
+    "description": "Dive into advanced concepts and techniques in Python programming.",
+    "publisher": "615ae0a87df3a8abc1234573",
+    "url": "https://example.com/advanced-python",
+    "type": "Course",
+    "difficulty": "Advanced",
+    "vote": 40,
+    "topics": ["615ae0a87df3a8abc123456e", "615ae0a87df3a8abc1234571"],
+    "createdAt": "2023-07-28T16:00:00.000Z",
+    "updatedAt": "2023-07-28T18:10:30.000Z"
+  }
+]
