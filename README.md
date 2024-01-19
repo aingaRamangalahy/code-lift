@@ -40,10 +40,6 @@ Contributions to this project are welcome! If you would like to contribute, plea
 
 5. Submit a pull request with a clear description of the changes and the problem it solves.
 
-### License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
 ### Contact
 
 If you have any questions or need further assistance, please feel free to contact the project maintainers at [aingaramangalahy@gmail.com](mailto:aingaramangalahy@gmail.com).

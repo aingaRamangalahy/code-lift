@@ -15,9 +15,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
 
   .title {
     font-size: 20px;
+    cursor: pointer;
+    font-weight: bolder;
   }
 }
 </style>

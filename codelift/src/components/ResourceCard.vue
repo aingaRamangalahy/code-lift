@@ -24,10 +24,12 @@ const formatDate = (date: Date = new Date()) =>  new Intl.DateTimeFormat('en-US'
 
 <style lang="scss" scoped>
 .resource-card-container {
-  border: 1px solid $secondary-border-color;
+  border: 2px solid $secondary-border-color;
+  // background: $content-background-color;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 15px 25px;
   margin: 20px 0;
+  cursor: pointer;
 
   .title {
     font-size: 18px;
@@ -54,7 +56,7 @@ const formatDate = (date: Date = new Date()) =>  new Intl.DateTimeFormat('en-US'
   }
 
   .description {
-    color: $accent-text-color;
+    color: $secondary-text-color;
     margin-top: 10px;
   }
 }
