@@ -32,10 +32,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 <template>
     <div class="flex flex-col container p-4 my-4">
         <p>Filter resources:</p>
-        <div class="flex gap-4 mt-4 w-full">
-            <USelectMenu class="w-1/4" v-model="state.technology" :options="technologies" />
-            <USelectMenu class="w-1/4" v-model="state.level" :options="levels" />
-            <USelectMenu class="w-1/4" v-model="state.contentType" :options="contentTypes" />
+        <div class="flex flex-col gap-4 mt-4 w-full">
+            <USelectMenu v-model="state.technology" :options="technologies" />
+            <USelectMenu v-model="state.level" :options="levels" />
+            <USelectMenu v-model="state.contentType" :options="contentTypes" />
             <UButton label="Search" @click="onSubmit" />
         </div>
     </div>

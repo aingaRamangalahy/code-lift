@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-        <FilterSection />
+    <div class="container py-8">
         <CardResourceItem />
     </div>
 </template>

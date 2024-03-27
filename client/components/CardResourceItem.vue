@@ -1,11 +1,11 @@
 <template>
     <BaseCard>
         <div class="flex">
-            <UIcon name="i-heroicons-light-bulb" class="w-1/6" />
+            <!-- <UIcon name="i-heroicons-light-bulb" class="w-1/6" /> -->
 
-            <div class="flex flex-col items-start mb-2 w-5/6">
+            <div class="flex flex-col items-start mb-2">
                 <h3 class="text-lg font-medium">Angular project CRUD</h3>
-                <p class="text-gray-500">
+                <p class="text-slate-400 my-2">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, sapiente
                     maiores? Officia voluptatum ea nobis dolor distinctio nam ipsa dignissimos culpa. Fugit, voluptas
                     veritatis obcaecati dolore ab ut impedit enim.
