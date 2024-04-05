@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const layoutStore = useLayoutStore();
 </script>
 
@@ -7,8 +8,9 @@ const layoutStore = useLayoutStore();
         <h1 class="text-3xl font-bold">codelift</h1>
         <div class="flex space-x-4">
             <UButton variant="ghost" icon="i-heroicons-plus" />
-            <UButton label="Sign In" @click="layoutStore.showModal('signInModal')" />
-            <UButton label="Sign Up" variant="outline" @click="layoutStore.showModal('signUpModal')" />
+            <UButton v-if="!useAuthStore().currentUser" label="Sign In" @click="layoutStore.showModal('signInModal')" />
+            <UButton v-if="!useAuthStore().currentUser" label="Sign Up" variant="outline" @click="layoutStore.showModal('signUpModal')" />
+            {{ useAuthStore().currentUser.name  }}
         </div>
     </header>
 </template>

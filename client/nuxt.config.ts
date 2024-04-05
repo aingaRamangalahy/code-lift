@@ -5,5 +5,10 @@ export default defineNuxtConfig({
     '@nuxt/ui', 
     '@pinia/nuxt',
   ],
-  css: ['~/assets/scss/main.scss']
+  css: ['~/assets/scss/main.scss'],
+  runtimeConfig: {
+    public: {
+      baseURL: process.env.API_BASE_URL
+    },
+  },
 })
