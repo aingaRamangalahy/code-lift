@@ -2,23 +2,14 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: ./frontend
+      context: ./apps/client
       dockerfile: Dockerfile.frontend
     ports:
       - "3003:80"
-    
-  admin:
-    build:
-      context: ./admin
-      dockerfile: Dockerfile.admin
-    ports:
-      - "4200:80"
-    depends_on:
-      - backend
 
   backend:
     build:
-      context: ./backend
+      context: ./apps/backend
       dockerfile: Dockerfile.backend
     ports:
       - "5000:5000"
