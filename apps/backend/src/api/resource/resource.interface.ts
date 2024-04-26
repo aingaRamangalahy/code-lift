@@ -1,5 +1,4 @@
-import { Document } from "mongoose";
-import  { IResource } from "@cl/types";
+import { Document } from 'mongoose';
+import { IResourceData } from '@cl/types';
 
-export interface IResourceDocument extends IResource, Document {
-}
+export interface IResourceDocument extends IResourceData, Document {}

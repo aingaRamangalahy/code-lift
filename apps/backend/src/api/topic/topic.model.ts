@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { ITopic, ITopicDocument } from './topic.interface';
+import { ITopicDocument } from './topic.interface';
 
 let TopicSchema = new Schema<ITopicDocument>(
     {
@@ -14,7 +14,7 @@ let TopicSchema = new Schema<ITopicDocument>(
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, required: false },
     },
-    { _id: true }
+    { _id: true },
 );
 
 export default model<ITopicDocument>('Topic', TopicSchema);

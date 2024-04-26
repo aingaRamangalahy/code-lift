@@ -15,6 +15,7 @@
         "@cl/types": "workspace:^1.0.0",
         "@nuxt/ui": "^2.14.2",
         "@pinia/nuxt": "^0.5.1",
+        "defu": "^6.1.4",
         "nuxt": "^3.10.3",
         "pinia": "^2.1.7",
         "tailwindcss": "^3.4.1",

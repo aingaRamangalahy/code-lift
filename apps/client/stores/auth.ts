@@ -1,8 +1,8 @@
-import type { IUser } from '../../shared-types/index'
-import { login, register } from '~/api/auth'
+import type { IUser } from '@cl/types'
+import { login, register } from '~/services/auth'
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        currentUser: {} as IUser,
+        currentUser: undefined as IUser | undefined,
         isLoading: false,
     }),
 
@@ -15,8 +15,8 @@ export const useAuthStore = defineStore('auth', {
         async login(email: string, password: string) {
             try {
                 this.isLoading = true
-                const user: IUser = await login(email, password)
-                if (user) this.currentUser = user
+                const user = await login(email, password)
+                this.currentUser = user
                 useLayoutStore().hideModal('signInModal')
             } finally {
                 this.isLoading = false
@@ -26,7 +26,7 @@ export const useAuthStore = defineStore('auth', {
         async register(name: string, email: string, password: string) {
             try {
                 this.isLoading = true
-                const user: IUser = await register(name, email, password)
+                const user = await register(name, email, password)
                 if (user) this.currentUser = user
                 useLayoutStore().hideModal('signUpModal')
             } finally {

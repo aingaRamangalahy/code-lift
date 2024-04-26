@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { ICategory, ICategoryDocument } from './category.interface';
+import { ICategoryDocument } from './category.interface';
 
 let CategorySchema = new Schema<ICategoryDocument>(
     {
@@ -16,7 +16,7 @@ let CategorySchema = new Schema<ICategoryDocument>(
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, required: false },
     },
-    { _id: true }
+    { _id: true },
 );
 
 export default model<ICategoryDocument>('Category', CategorySchema);

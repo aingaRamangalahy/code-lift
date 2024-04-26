@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { IResource, IResourceDocument } from './resource.interface';
+import { IResourceDocument } from './resource.interface';
 
 let ResourceSchema = new Schema<IResourceDocument>(
     {
@@ -34,7 +34,7 @@ let ResourceSchema = new Schema<IResourceDocument>(
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, required: false },
     },
-    { _id: true }
+    { _id: true },
 );
 
 export default model<IResourceDocument>('Resource', ResourceSchema);
