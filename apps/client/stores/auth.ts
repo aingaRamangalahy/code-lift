@@ -1,5 +1,6 @@
 import type { IUser } from '@cl/types'
 import { login, register } from '~/services/auth'
+
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         currentUser: undefined as IUser | undefined,
@@ -13,11 +14,15 @@ export const useAuthStore = defineStore('auth', {
     },
     actions: {
         async login(email: string, password: string) {
+            const toast = useToast()
             try {
                 this.isLoading = true
                 const user = await login(email, password)
                 this.currentUser = user
                 useLayoutStore().hideModal('signInModal')
+                toast.add({ title: 'User connected successfully' })
+            } catch (error) {
+                toast.add({ title: 'Error occured' })
             } finally {
                 this.isLoading = false
             }
