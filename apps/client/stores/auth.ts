@@ -21,8 +21,6 @@ export const useAuthStore = defineStore('auth', {
                 this.currentUser = user
                 useLayoutStore().hideModal('signInModal')
                 toast.add({ title: 'User connected successfully' })
-            } catch (error) {
-                toast.add({ title: 'Error occured' })
             } finally {
                 this.isLoading = false
             }

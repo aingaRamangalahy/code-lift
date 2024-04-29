@@ -23,10 +23,8 @@ export const useResourceStore = defineStore('resource', {
     actions: {
         async fetchResources() {
             try {
+                this.isLoading = true
                 this.resources = await getAllResources()
-                console.log('got resources', this.resources)
-            } catch (error) {
-                console.error('&$-*ù', error)
             } finally {
                 this.isLoading = false
             }

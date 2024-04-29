@@ -10,6 +10,7 @@ export const useApi = (
 ) => {
     const token = useToken()
     const config = useRuntimeConfig()
+    const toast = useToast()
     const defaultOptions: NitroFetchOptions<NitroFetchRequest> = {
         baseURL: config.public.baseURL,
         method: 'GET',
@@ -27,13 +28,22 @@ export const useApi = (
         },
 
         onResponse({ response }) {
-            console.log('onRespon fired 🔥')
-            const token = response._data.data.token
-            if (token) token.set(token)
+            if (!response.ok) {
+                const defaultMessage = 'An error occured.'
+                const serverMessage = response._data.errorMessage
+                toast.add({
+                    title: defaultMessage,
+                    description: serverMessage,
+                    color: 'red',
+                })
+            } else {
+                const token = response._data.data.token
+                if (token) token.set(token)
+            }
         },
 
         onResponseError({ response }) {
-            console.log('onResponseErrorFired🔥')
+            console.log(':crossed_flags: onResponseErrorFired🔥', response)
         },
     }
     const options = defu(
