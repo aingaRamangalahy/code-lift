@@ -40,7 +40,7 @@ export default class ResourceService {
                 await this.resourceRepository.getResources(getResourcePayload);
             return {
                 success: true,
-                data: [],
+                data: resources,
             };
         } catch (error) {
             throw error;
