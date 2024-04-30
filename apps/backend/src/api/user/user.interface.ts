@@ -1,7 +1,7 @@
-import { Document } from "mongoose";
-import { IUser } from "@cl/types";
+import { Document } from 'mongoose';
+import { IUserData } from '@cl/types';
 
-export interface IUserDocument extends IUser, Document {
+export interface IUserDocument extends IUserData, Document {
     generateToken(): string;
     generateResetPasswordToken(): string;
     matchPassword: (password: string) => Promise<boolean>;

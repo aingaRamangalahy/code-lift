@@ -6,18 +6,19 @@ onBeforeMount(async () => {
     await resourceStore.fetchResources();
     isLoading.value = false
 })
+
 </script>
 <template>
     <div class="py-8">
-        <template v-if="!isLoading">
+        <div v-if="!isLoading">
             <div class="resource  my-4" v-for="resource in resourceStore.resources">
                 <CardResourceItem :resource="resource" />
             </div>
-        </template>
-        <template v-else>
-            <div class="resource  my-4" v-for="n in 4">
+        </div>
+        <div v-else>
+            <div class="resource  my-4">
                 <CardResourceSkeleton />
             </div>
-        </template>
+        </div>
     </div>
 </template>

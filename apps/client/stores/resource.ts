@@ -1,5 +1,5 @@
 import type { IResource } from '@cl/types'
-import { getAllResources } from '~/services/resource'
+import { getAllResources, addResource } from '~/services/resource'
 
 export const useResourceStore = defineStore('resource', {
     state: () => ({
@@ -25,6 +25,17 @@ export const useResourceStore = defineStore('resource', {
             try {
                 this.isLoading = true
                 this.resources = await getAllResources()
+            } finally {
+                this.isLoading = false
+            }
+        },
+
+        async addResource(resource: IResource) {
+            try {
+                this.isLoading = true
+                const result = await addResource(resource)
+                this.resources.unshift(result)
+                useLayoutStore().hideModal('addResource')
             } finally {
                 this.isLoading = false
             }

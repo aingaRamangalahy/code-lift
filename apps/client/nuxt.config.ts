@@ -8,4 +8,7 @@ export default defineNuxtConfig({
             baseURL: process.env.API_BASE_URL,
         },
     },
+    ui: {
+        icons: ['mdi', 'heroicons'],
+    },
 })

@@ -1,8 +1,9 @@
 export enum AUTH_ROUTES {
     LOGIN = '/api/auth/login',
     REGISTER = '/api/auth/register',
+    LOGOUT = '/api/auth/logout',
 }
 
 export enum RESOURCES_ROUTES {
-    GET_ALL = '/api/resources',
+    BASE = '/api/resources',
 }

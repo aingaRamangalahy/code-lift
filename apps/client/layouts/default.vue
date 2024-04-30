@@ -11,5 +11,6 @@
 
     <ModalSignIn />
     <ModalSignUp />
+    <ModalResourceAdd />
     <UNotifications />
 </template>

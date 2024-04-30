@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IUserData {
     name: string
     email: string
     role: string
@@ -11,4 +11,8 @@ export interface IUser {
     updatedAt?: Date
     resetPasswordToken?: String
     resetPasswordExpire?: number
+}
+
+export interface IUser extends IUserData {
+    _id: string
 }

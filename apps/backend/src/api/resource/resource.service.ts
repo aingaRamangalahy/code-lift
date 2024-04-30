@@ -1,9 +1,9 @@
-import { Service } from "typedi";
-import { IResourceDocument } from "./resource.interface";
-import Resource from "./resource.model";
-import { ErrorResponse } from "@core/utils";
-import { ResourceRepository } from "./resource.repository";
-import { IFindPayload } from "@core/interfaces";
+import { Service } from 'typedi';
+import { IResourceDocument } from './resource.interface';
+import Resource from './resource.model';
+import { ErrorResponse } from '@core/utils';
+import { ResourceRepository } from './resource.repository';
+import { IFindPayload } from '@core/interfaces';
 
 @Service()
 export default class ResourceService {
@@ -15,7 +15,8 @@ export default class ResourceService {
 
     createResource = async (resourcePayload: IResourceDocument) => {
         try {
-            const resource = await this.resourceRepository.addResource(resourcePayload);
+            const resource =
+                await this.resourceRepository.addResource(resourcePayload);
             return {
                 success: true,
                 data: resource,
@@ -29,12 +30,17 @@ export default class ResourceService {
     getAllResources = async () => {
         try {
             const getResourcePayload: IFindPayload = {
-                populateFields: ['topics']
-            }
-            const resources = await this.resourceRepository.getResources(getResourcePayload);
+                populateFields: ['topics'],
+                sortBy: {
+                    field: 'createdAt',
+                    direction: 'desc',
+                },
+            };
+            const resources =
+                await this.resourceRepository.getResources(getResourcePayload);
             return {
                 success: true,
-                data: resources,
+                data: [],
             };
         } catch (error) {
             throw error;
@@ -43,11 +49,17 @@ export default class ResourceService {
 
     getResourceById = async (id: string) => {
         try {
-            const populateFields = ['topics']
-            const resource = await this.resourceRepository.getResourceById(id, populateFields);
+            const populateFields = ['topics'];
+            const resource = await this.resourceRepository.getResourceById(
+                id,
+                populateFields,
+            );
 
             if (!resource) {
-                throw new ErrorResponse(`Resource with id: ${id} not found`, 404);
+                throw new ErrorResponse(
+                    `Resource with id: ${id} not found`,
+                    404,
+                );
             }
 
             return {
@@ -61,17 +73,22 @@ export default class ResourceService {
 
     updateResource = async (id: string, resourcePayload: IResourceDocument) => {
         try {
-            const resource = await this.resourceRepository.updateResource(id, resourcePayload);
+            const resource = await this.resourceRepository.updateResource(
+                id,
+                resourcePayload,
+            );
 
             if (!resource) {
-                throw new ErrorResponse(`Resource with id: ${id} not found`, 404);
+                throw new ErrorResponse(
+                    `Resource with id: ${id} not found`,
+                    404,
+                );
             }
 
             return {
                 success: true,
                 data: resource,
             };
-
         } catch (error) {
             throw error;
         }
@@ -81,13 +98,15 @@ export default class ResourceService {
         try {
             const resource = await this.resourceRepository.deleteResource(id);
             if (!resource) {
-                throw new ErrorResponse(`Resource with id: ${id} not found`, 404);
+                throw new ErrorResponse(
+                    `Resource with id: ${id} not found`,
+                    404,
+                );
             }
             return {
                 success: true,
                 data: `Resource removed successfully`,
             };
-            
         } catch (error) {
             throw error;
         }

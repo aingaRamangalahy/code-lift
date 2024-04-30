@@ -9,7 +9,6 @@ defineProps({
 <template>
     <BaseCard>
         <div class="flex">
-            <!-- <UIcon name="i-heroicons-light-bulb" class="w-1/6" /> -->
 
             <div class="flex flex-col items-start mb-2">
                 <h3 class="text-lg font-medium">{{ resource?.title }}</h3>

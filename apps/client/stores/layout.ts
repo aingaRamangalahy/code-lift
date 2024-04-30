@@ -2,6 +2,7 @@ export const useLayoutStore = defineStore('layout', {
     state: () => ({
         signInModal: false,
         signUpModal: false,
+        addResource: false,
     }),
 
     getters: {

@@ -9,13 +9,13 @@ const authFixture = {
         response: {
             status: 200,
             body: {
-              success: true,
-              data: {
-                  name: 'test',
-                  email: 'test@test.com',
-                  role: 'publisher',
-              },
-              token: 'sample-token',
+                success: true,
+                data: {
+                    name: 'test',
+                    email: 'test@test.com',
+                    role: 'publisher',
+                },
+                token: 'sample-token',
             },
         },
     },

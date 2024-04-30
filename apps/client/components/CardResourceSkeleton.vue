@@ -1,5 +1,4 @@
 <template>
-    <!-- <UIcon name="i-heroicons-light-bulb" class="w-1/6" /> -->
     <div class="flex flex-col items-start mb-8 w-full">
         <USkeleton class="h-4 mb-2 w-full" />
         <USkeleton class="h-8 w-full" />

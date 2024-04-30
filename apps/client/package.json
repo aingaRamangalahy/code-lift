@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@cl/types": "workspace:^1.0.0",
+        "@iconify-json/mdi": "^1.1.66",
         "@nuxt/ui": "^2.14.2",
         "@pinia/nuxt": "^0.5.1",
         "defu": "^6.1.4",
