@@ -6,7 +6,7 @@ import {
     updateTopicHandler,
     deleteTopicHandler,
 } from './topic.controller';
-import { auth } from '@core/middlewares';
+import { protectRoute, authorizedRoles } from '@core/middlewares';
 
 const router = Router();
 
@@ -17,24 +17,24 @@ router.get('', getTopicsHandler);
 // POST
 router.post(
     '',
-    auth.protectRoute,
-    auth.authorizedRoles('admin', 'super-admin'),
+    protectRoute,
+    authorizedRoles('admin', 'super-admin'),
     createTopicHandler,
 );
 
 // DELETE
 router.delete(
     '/:id',
-    auth.protectRoute,
-    auth.authorizedRoles('super-admin'),
+    protectRoute,
+    authorizedRoles('super-admin'),
     deleteTopicHandler,
 );
 
 // PUT
 router.put(
     '/:id',
-    auth.protectRoute,
-    auth.authorizedRoles('admin', 'super-admin'),
+    protectRoute,
+    authorizedRoles('admin', 'super-admin'),
     updateTopicHandler,
 );
 

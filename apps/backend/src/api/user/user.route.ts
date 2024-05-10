@@ -6,7 +6,7 @@ import {
     updateUserHandler,
     deleteUserHandler,
 } from './user.controller';
-import { auth } from '@core/middlewares';
+import { protectRoute, authorizedRoles } from '@core/middlewares';
 
 const router = Router();
 
@@ -14,32 +14,32 @@ const router = Router();
 router.get('/:id', getUserHandler);
 router.get(
     '',
-    auth.protectRoute,
-    auth.authorizedRoles('admin', 'super-admin'),
+    protectRoute,
+    authorizedRoles('admin', 'super-admin'),
     getUsersHandler,
 );
 
 // POST
 router.post(
     '',
-    auth.protectRoute,
-    auth.authorizedRoles('admin', 'super-admin'),
+    protectRoute,
+    authorizedRoles('admin', 'super-admin'),
     createUserHandler,
 );
 
 // DELETE
 router.delete(
     '/:id',
-    auth.protectRoute,
-    auth.authorizedRoles('super-admin'),
+    protectRoute,
+    authorizedRoles('super-admin'),
     deleteUserHandler,
 );
 
 // PUT
 router.put(
     '/:id',
-    auth.protectRoute,
-    auth.authorizedRoles('admin', 'super-admin'),
+    protectRoute,
+    authorizedRoles('admin', 'super-admin'),
     updateUserHandler,
 );
 

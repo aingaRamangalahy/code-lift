@@ -83,9 +83,6 @@ importers:
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.12.7)(typescript@5.4.5)
-      typedi:
-        specifier: ^0.10.0
-        version: 0.10.0
       winston:
         specifier: ^3.9.0
         version: 3.13.0
@@ -12066,10 +12063,6 @@ packages:
 
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
-    dev: false
-
-  /typedi@0.10.0:
-    resolution: {integrity: sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==}
     dev: false
 
   /typescript-eslint@7.7.0(eslint@8.57.0)(typescript@5.4.5):

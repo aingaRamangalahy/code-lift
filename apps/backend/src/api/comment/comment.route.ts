@@ -6,7 +6,7 @@ import {
     updateCommentHandler,
     deleteCommentHandler,
 } from './comment.controller';
-import { auth } from '@core/middlewares';
+import { protectRoute, authorizedRoles } from '@core/middlewares';
 
 const router = Router();
 
@@ -15,17 +15,17 @@ router.get('', getCommentsHandler);
 router.get('/:id', getCommentHandler);
 
 // POST
-router.post('', auth.protectRoute, createCommentHandler);
+router.post('', protectRoute, createCommentHandler);
 
 // DELETE
 router.delete(
     '/:id',
-    auth.protectRoute,
-    auth.authorizedRoles('admin', 'super-admin'),
+    protectRoute,
+    authorizedRoles('admin', 'super-admin'),
     deleteCommentHandler,
 );
 
 // PUT
-router.put('/:id', auth.protectRoute, updateCommentHandler);
+router.put('/:id', protectRoute, updateCommentHandler);
 
 export default router;

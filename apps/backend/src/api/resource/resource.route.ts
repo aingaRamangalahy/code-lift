@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { auth } from '@core/middlewares';
+import { protectRoute, authorizedRoles } from '@core/middlewares';
 import {
     getResourcesHandler,
     getResourceHandler,
@@ -15,21 +15,21 @@ router.get('/:id', getResourceHandler);
 
 router.post(
     '',
-    auth.protectRoute,
-    auth.authorizedRoles('publisher', 'admin'),
+    protectRoute,
+    authorizedRoles('publisher', 'admin'),
     createResourceHandler,
 );
 
 router.delete(
     '/:id',
-    auth.authorizedRoles('publisher', 'admin', 'super-admin'),
+    authorizedRoles('publisher', 'admin', 'super-admin'),
     deleteResourceHandler,
 );
 
 router.put(
     '/:id',
-    auth.protectRoute,
-    auth.authorizedRoles('publisher', 'admin'),
+    protectRoute,
+    authorizedRoles('publisher', 'admin'),
     updateResourceHandler,
 );
 

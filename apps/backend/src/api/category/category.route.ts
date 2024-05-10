@@ -6,7 +6,7 @@ import {
     updateCategoryHandler,
     deleteCategoryHandler,
 } from './category.controller';
-import { auth } from '@core/middlewares';
+import { protectRoute, authorizedRoles } from '@core/middlewares';
 
 const router = Router();
 
@@ -17,24 +17,24 @@ router.get('/:id', getCategoryHandler);
 // POST
 router.post(
     '',
-    auth.protectRoute,
-    auth.authorizedRoles('admin', 'super-admin'),
+    protectRoute,
+    authorizedRoles('admin', 'super-admin'),
     createCategoryHandler,
 );
 
 // DELETE
 router.delete(
     '/:id',
-    auth.protectRoute,
-    auth.authorizedRoles('super-admin'),
+    protectRoute,
+    authorizedRoles('super-admin'),
     deleteCategoryHandler,
 );
 
 // PUT
 router.put(
     '/:id',
-    auth.protectRoute,
-    auth.authorizedRoles('admin', 'super-admin'),
+    protectRoute,
+    authorizedRoles('admin', 'super-admin'),
     updateCategoryHandler,
 );
 
