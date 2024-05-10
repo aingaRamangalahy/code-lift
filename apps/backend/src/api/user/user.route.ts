@@ -1,48 +1,46 @@
 import { Router } from 'express';
-import UserController from './user.controller';
+import {
+    getUserHandler,
+    getUsersHandler,
+    createUserHandler,
+    updateUserHandler,
+    deleteUserHandler,
+} from './user.controller';
 import { auth } from '@core/middlewares';
-class UserRouter {
-    router: Router;
 
-    constructor() {
-        this.router = Router();
-        this.routes();
-    }
+const router = Router();
 
-    routes() {
-        // GET
-        this.router.get('/:id', UserController.getUser);
-        this.router.get(
-            '',
-            auth.protectRoute,
-            auth.authorizedRoles('admin', 'super-admin'),
-            UserController.getUsers
-        );
+// GET
+router.get('/:id', getUserHandler);
+router.get(
+    '',
+    auth.protectRoute,
+    auth.authorizedRoles('admin', 'super-admin'),
+    getUsersHandler,
+);
 
-        // POST
-        this.router.post(
-            '',
-            auth.protectRoute,
-            auth.authorizedRoles('admin', 'super-admin'),
-            UserController.createUser
-        );
+// POST
+router.post(
+    '',
+    auth.protectRoute,
+    auth.authorizedRoles('admin', 'super-admin'),
+    createUserHandler,
+);
 
-        // DELETE
-        this.router.delete(
-            '/:id',
-            auth.protectRoute,
-            auth.authorizedRoles('super-admin'),
-            UserController.deleteUser
-        );
+// DELETE
+router.delete(
+    '/:id',
+    auth.protectRoute,
+    auth.authorizedRoles('super-admin'),
+    deleteUserHandler,
+);
 
-        // PUT
-        this.router.put(
-            '/:id',
-            auth.protectRoute,
-            auth.authorizedRoles('admin', 'super-admin'),
-            UserController.updateUser
-        );
-    }
-}
+// PUT
+router.put(
+    '/:id',
+    auth.protectRoute,
+    auth.authorizedRoles('admin', 'super-admin'),
+    updateUserHandler,
+);
 
-export default new UserRouter().router;
+export default router;

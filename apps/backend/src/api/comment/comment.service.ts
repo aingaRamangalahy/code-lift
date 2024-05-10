@@ -1,95 +1,75 @@
-import { Service } from "typedi";
-import { ICommentDocument } from "./comment.interface";
-import Comment from "./comment.model";
-import { ErrorResponse } from "@core/utils";
-import { CommentRepository } from "./comment.repository";
-import { IFindPayload } from "@core/interfaces";
+import Comment from './comment.model';
+import { ErrorResponse } from '@core/utils';
 
-@Service()
-export default class CommentService {
-    private readonly commentRepository: CommentRepository;
-
-    constructor() {
-        this.commentRepository = new CommentRepository(Comment);
+export const getComments = async () => {
+    try {
+        const comments = await Comment.find();
+        return {
+            success: true,
+            data: comments,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to fetch comments', 500);
     }
+};
 
-    createComment = async (commentPayload: ICommentDocument) => {
-        try {
-            const comment = await this.commentRepository.addComment(commentPayload);
-            return {
-                success: true,
-                data: comment,
-            };
-        } catch (error) {
-            /**thorw errors to let erroHandler handle them */
-            throw error;
+export const getCommentById = async (commentId) => {
+    try {
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
+            throw new ErrorResponse('Comment not found', 404);
         }
-    };
+        return {
+            success: true,
+            data: comment,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to fetch comment', 500);
+    }
+};
 
-    getAllComments = async () => {
-        try {
-            const commentPayload: IFindPayload = {
-                populateFields: ["user", "parentComment", "resource"]
-            } 
-            const comments = await this.commentRepository.getComments(commentPayload);
-            return {
-                success: true,
-                data: comments,
-            };
-        } catch (error) {
-            throw error;
+export const createComment = async (commentData) => {
+    try {
+        const comment = await Comment.create(commentData);
+        return {
+            success: true,
+            data: comment,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to create comment', 500);
+    }
+};
+
+export const updateComment = async (commentId, commentData) => {
+    try {
+        const comment = await Comment.findByIdAndUpdate(
+            commentId,
+            commentData,
+            { new: true },
+        );
+        if (!comment) {
+            throw new ErrorResponse('Comment not found', 404);
         }
-    };
+        return {
+            success: true,
+            data: comment,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to update comment', 500);
+    }
+};
 
-    getCommentById = async (id: string) => {
-        try {
-            const populateFields = ["user", "parentComment", "resource"];
-            const comment = await this.commentRepository.getCommentById(id, populateFields);
-
-            if (!comment) {
-                throw new ErrorResponse(`Comment with id: ${id} not found`, 404);
-            }
-
-            return {
-                success: true,
-                data: comment,
-            };
-        } catch (error) {
-            throw error;
+export const deleteComment = async (commentId) => {
+    try {
+        const comment = await Comment.findByIdAndDelete(commentId);
+        if (!comment) {
+            throw new ErrorResponse('Comment not found', 404);
         }
-    };
-
-    updateComment = async (id: string, commentPayload: ICommentDocument) => {
-        try {
-            const comment = await this.commentRepository.updateComment(id, commentPayload);
-
-            if (!comment) {
-                throw new ErrorResponse(`Comment with id: ${id} not found`, 404);
-            }
-
-            return {
-                success: true,
-                data: comment,
-            };
-
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    deleteComment = async (id: string) => {
-        try {
-            const comment = await this.commentRepository.deleteComment(id);
-            if (!comment) {
-                throw new ErrorResponse(`Comment with id: ${id} not found`, 404);
-            }
-            return {
-                success: true,
-                data: `Comment removed successfully`,
-            };
-            
-        } catch (error) {
-            throw error;
-        }
-    };
-}
+        return {
+            success: true,
+            data: comment,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to delete comment', 500);
+    }
+};

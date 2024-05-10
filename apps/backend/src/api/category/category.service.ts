@@ -1,95 +1,75 @@
-import { Service } from "typedi";
-import { ICategoryDocument } from "./category.interface";
-import Category from "./category.model";
-import { ErrorResponse } from "@core/utils";
-import { CategoryRepository } from "./category.repository";
-import { IFindPayload } from "@core/interfaces";
+import Category from './category.model';
+import { ErrorResponse } from '@core/utils';
 
-@Service()
-export default class CategoryService {
-    private readonly categoryRepository: CategoryRepository;
-
-    constructor() {
-        this.categoryRepository = new CategoryRepository(Category);
+export const getCategories = async () => {
+    try {
+        const categories = await Category.find();
+        return {
+            success: true,
+            data: categories,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to fetch categories', 500);
     }
+};
 
-    createCategory = async (categoryPayload: ICategoryDocument) => {
-        try {
-            const category = await this.categoryRepository.addCategory(categoryPayload);
-            return {
-                success: true,
-                data: category,
-            };
-        } catch (error) {
-            /**thorw errors to let erroHandler handle them */
-            throw error;
+export const getCategoryById = async (categoryId) => {
+    try {
+        const category = await Category.findById(categoryId);
+        if (!category) {
+            throw new ErrorResponse('Category not found', 404);
         }
-    };
+        return {
+            success: true,
+            data: category,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to fetch category', 500);
+    }
+};
 
-    getAllCategories = async () => {
-        try {
-            const payload: IFindPayload = {
-                populateFields: ['topics']
-            }
-            const categories = await this.categoryRepository.getCategories(payload);
-            return {
-                success: true,
-                data: categories,
-            };
-        } catch (error) {
-            throw error;
+export const createCategory = async (categoryData) => {
+    try {
+        const category = await Category.create(categoryData);
+        return {
+            success: true,
+            data: category,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to create category', 500);
+    }
+};
+
+export const updateCategory = async (categoryId, categoryData) => {
+    try {
+        const category = await Category.findByIdAndUpdate(
+            categoryId,
+            categoryData,
+            { new: true },
+        );
+        if (!category) {
+            throw new ErrorResponse('Category not found', 404);
         }
-    };
+        return {
+            success: true,
+            data: category,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to update category', 500);
+    }
+};
 
-    getCategoryById = async (id: string) => {
-        try {
-            const populateFields = ['topics'];
-            const category = await this.categoryRepository.getCategoryById(id, populateFields);
-
-            if (!category) {
-                throw new ErrorResponse(`Category with id: ${id} not found`, 404);
-            }
-
-            return {
-                success: true,
-                data: category,
-            };
-        } catch (error) {
-            throw error;
+export const deleteCategory = async (categoryId) => {
+    try {
+        const category = await Category.findByIdAndDelete(categoryId);
+        if (!category) {
+            throw new ErrorResponse('Category not found', 404);
         }
-    };
-
-    updateCategory = async (id: string, categoryPayload: ICategoryDocument) => {
-        try {
-            const category = await this.categoryRepository.updateCategory(id, categoryPayload);
-
-            if (!category) {
-                throw new ErrorResponse(`Category with id: ${id} not found`, 404);
-            }
-
-            return {
-                success: true,
-                data: category,
-            };
-
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    deleteCategory = async (id: string) => {
-        try {
-            const category = await this.categoryRepository.deleteCategory(id);
-            if (!category) {
-                throw new ErrorResponse(`Category with id: ${id} not found`, 404);
-            }
-            return {
-                success: true,
-                data: `Category removed successfully`,
-            };
-            
-        } catch (error) {
-            throw error;
-        }
-    };
-}
+        return {
+            success: true,
+            data: category,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to delete category', 500);
+    }
+};

@@ -1,51 +1,45 @@
-import { Response, NextFunction } from "express";
-import { asyncHandler } from "@core/middlewares";
-import { ExtendedRequest } from "@core/interfaces";
-import Container from "typedi";
-import UserService from "./user.service";
+import { Response, NextFunction } from 'express';
+import { asyncHandler } from '@core/middlewares';
+import { ExtendedRequest } from '@core/interfaces';
+import {
+    getAllUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser,
+} from './user.service';
 
-class UserController {
-  private readonly userService: UserService = Container.get(UserService);
-
-  constructor() {}
-
-  getUsers = asyncHandler(
+export const getUsersHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.userService.getAllUsers();
-      res.status(200).json(response);
-    }
-  );
+        const response = await getAllUsers();
+        res.status(200).json(response);
+    },
+);
 
-  getUser = asyncHandler(
+export const getUserHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.userService.getUserById(req.params.id);
-      res.status(200).json(response);
-    }
-  );
+        const response = await getUserById(req.params.id);
+        res.status(200).json(response);
+    },
+);
 
-  createUser = asyncHandler(
+export const createUserHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      let response = await this.userService.createUser(req.body);
-      res.status(200).json(response);
-    }
-  );
+        let response = await createUser(req.body);
+        res.status(200).json(response);
+    },
+);
 
-  updateUser = asyncHandler(
+export const updateUserHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.userService.updateUser(
-        req.params.id,
-        req.body
-      );
-      res.status(200).json(response);
-    }
-  );
+        const response = await updateUser(req.params.id, req.body);
+        res.status(200).json(response);
+    },
+);
 
-  deleteUser = asyncHandler(
+export const deleteUserHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      let response = await this.userService.deleteUser(req.params.id);
-      res.status(200).json(response);
-    }
-  );
-}
-
-export default new UserController();
+        let response = await deleteUser(req.params.id);
+        res.status(200).json(response);
+    },
+);

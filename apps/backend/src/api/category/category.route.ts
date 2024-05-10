@@ -1,43 +1,41 @@
 import { Router } from 'express';
-import CategoryController from './category.controller';
+import {
+    getCategoriesHandler,
+    getCategoryHandler,
+    createCategoryHandler,
+    updateCategoryHandler,
+    deleteCategoryHandler,
+} from './category.controller';
 import { auth } from '@core/middlewares';
-class CategoryRouter {
-    router: Router;
 
-    constructor() {
-        this.router = Router();
-        this.routes();
-    }
+const router = Router();
 
-    routes() {
-        // GET
-        this.router.get('/:id', CategoryController.getCategory);
-        this.router.get('', CategoryController.getCategories);
+// GET
+router.get('', getCategoriesHandler);
+router.get('/:id', getCategoryHandler);
 
-        // POST
-        this.router.post(
-            '',
-            auth.protectRoute,
-            auth.authorizedRoles('admin', 'super-admin'),
-            CategoryController.createCategory
-        );
+// POST
+router.post(
+    '',
+    auth.protectRoute,
+    auth.authorizedRoles('admin', 'super-admin'),
+    createCategoryHandler,
+);
 
-        // DELETE
-        this.router.delete(
-            '/:id',
-            auth.protectRoute,
-            auth.authorizedRoles('super-admin'),
-            CategoryController.deleteCategory
-        );
+// DELETE
+router.delete(
+    '/:id',
+    auth.protectRoute,
+    auth.authorizedRoles('super-admin'),
+    deleteCategoryHandler,
+);
 
-        // PUT
-        this.router.put(
-            '/:id',
-            auth.protectRoute,
-            auth.authorizedRoles('admin', 'super-admin'),
-            CategoryController.updateCategory
-        );
-    }
-}
+// PUT
+router.put(
+    '/:id',
+    auth.protectRoute,
+    auth.authorizedRoles('admin', 'super-admin'),
+    updateCategoryHandler,
+);
 
-export default new CategoryRouter().router;
+export default router;

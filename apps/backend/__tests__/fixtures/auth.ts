@@ -30,7 +30,7 @@ const authFixture = {
             status: 401,
             body: {
                 success: false,
-                errorMessage: '\tWrong password',
+                errorMessage: 'Wrong password',
             },
         },
     },

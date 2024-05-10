@@ -1,51 +1,45 @@
-import { Response, NextFunction } from "express";
-import { asyncHandler } from "@core/middlewares";
-import { ExtendedRequest } from "@core/interfaces";
-import Container from "typedi";
-import TopicService from "./topic.service";
+import { Response, NextFunction } from 'express';
+import { asyncHandler } from '@core/middlewares';
+import { ExtendedRequest } from '@core/interfaces';
+import {
+    getAllTopics,
+    getTopicById,
+    createTopic as createTopicService,
+    updateTopic,
+    deleteTopic,
+} from './topic.service';
 
-class TopicController {
-  private readonly topicService: TopicService = Container.get(TopicService);
-
-  constructor() {}
-
-  getTopics = asyncHandler(
+export const getTopicsHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.topicService.getAllTopics();
-      res.status(200).json(response);
-    }
-  );
+        const response = await getAllTopics();
+        res.status(200).json(response);
+    },
+);
 
-  getTopic = asyncHandler(
+export const getTopicHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.topicService.getTopicById(req.params.id);
-      res.status(200).json(response);
-    }
-  );
+        const response = await getTopicById(req.params.id);
+        res.status(200).json(response);
+    },
+);
 
-  createTopic = asyncHandler(
+export const createTopicHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      let response = await this.topicService.createTopic(req.body);
-      res.status(200).json(response);
-    }
-  );
+        let response = await createTopicService(req.body);
+        res.status(200).json(response);
+    },
+);
 
-  updateTopic = asyncHandler(
+export const updateTopicHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.topicService.updateTopic(
-        req.params.id,
-        req.body
-      );
-      res.status(200).json(response);
-    }
-  );
+        const response = await updateTopic(req.params.id, req.body);
+        res.status(200).json(response);
+    },
+);
 
-  deleteTopic = asyncHandler(
+export const deleteTopicHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      let response = await this.topicService.deleteTopic(req.params.id);
-      res.status(200).json(response);
-    }
-  );
-}
-
-export default new TopicController();
+        let response = await deleteTopic(req.params.id);
+        res.status(200).json(response);
+    },
+);

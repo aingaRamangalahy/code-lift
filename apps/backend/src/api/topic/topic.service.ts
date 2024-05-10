@@ -1,90 +1,73 @@
-import { Service } from "typedi";
-import { ITopicDocument } from "./topic.interface";
-import Topic from "./topic.model";
-import { ErrorResponse } from "@core/utils";
-import { TopicRepository } from "./topic.repository";
+import Topic from './topic.model';
+import { ErrorResponse } from '@core/utils';
 
-@Service()
-export default class TopicService {
-    private readonly topicRepository: TopicRepository;
-
-    constructor() {
-        this.topicRepository = new TopicRepository(Topic);
+export const getAllTopics = async () => {
+    try {
+        const topics = await Topic.find();
+        return {
+            success: true,
+            data: topics,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to fetch topics', 500);
     }
+};
 
-    createTopic = async (topicPayload: ITopicDocument) => {
-        try {
-            const topic = await this.topicRepository.addTopic(topicPayload);
-            return {
-                success: true,
-                data: topic,
-            };
-        } catch (error) {
-            /**thorw errors to let erroHandler handle them */
-            throw error;
+export const getTopicById = async (topicId) => {
+    try {
+        const topic = await Topic.findById(topicId);
+        if (!topic) {
+            throw new ErrorResponse('Topic not found', 404);
         }
-    };
+        return {
+            success: true,
+            data: topic,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to fetch topic', 500);
+    }
+};
 
-    getAllTopics = async () => {
-        try {
-            const topics = await this.topicRepository.getTopics();
-            return {
-                success: true,
-                data: topics,
-            };
-        } catch (error) {
-            throw error;
+export const createTopic = async (topicData) => {
+    try {
+        const topic = await Topic.create(topicData);
+        return {
+            success: true,
+            data: topic,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to create topic', 500);
+    }
+};
+
+export const updateTopic = async (topicId, topicData) => {
+    try {
+        const topic = await Topic.findByIdAndUpdate(topicId, topicData, {
+            new: true,
+        });
+        if (!topic) {
+            throw new ErrorResponse('Topic not found', 404);
         }
-    };
+        return {
+            success: true,
+            data: topic,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to update topic', 500);
+    }
+};
 
-    getTopicById = async (id: string) => {
-        try {
-            const topic = await this.topicRepository.getTopicById(id);
-
-            if (!topic) {
-                throw new ErrorResponse(`Topic with id: ${id} not found`, 404);
-            }
-
-            return {
-                success: true,
-                data: topic,
-            };
-        } catch (error) {
-            throw error;
+export const deleteTopic = async (topicId) => {
+    try {
+        const topic = await Topic.findByIdAndDelete(topicId);
+        if (!topic) {
+            throw new ErrorResponse('Topic not found', 404);
         }
-    };
-
-    updateTopic = async (id: string, topicPayload: ITopicDocument) => {
-        try {
-            const topic = await this.topicRepository.updateTopic(id, topicPayload);
-
-            if (!topic) {
-                throw new ErrorResponse(`Topic with id: ${id} not found`, 404);
-            }
-
-            return {
-                success: true,
-                data: topic,
-            };
-
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    deleteTopic = async (id: string) => {
-        try {
-            const topic = await this.topicRepository.deleteTopic(id);
-            if (!topic) {
-                throw new ErrorResponse(`Topic with id: ${id} not found`, 404);
-            }
-            return {
-                success: true,
-                data: `Topic removed successfully`,
-            };
-            
-        } catch (error) {
-            throw error;
-        }
-    };
-}
+        return {
+            success: true,
+            data: topic,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to delete topic', 500);
+    }
+};

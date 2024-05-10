@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { IResourceDocument } from './resource.interface';
 
-let ResourceSchema = new Schema<IResourceDocument>(
+const ResourceSchema = new Schema<IResourceDocument>(
     {
         title: {
             type: String,

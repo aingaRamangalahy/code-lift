@@ -1,51 +1,45 @@
-import { Response, NextFunction } from "express";
-import { asyncHandler } from "@core/middlewares";
-import { ExtendedRequest } from "@core/interfaces";
-import Container from "typedi";
-import CommentService from "./comment.service";
+import { Response, NextFunction } from 'express';
+import { asyncHandler } from '@core/middlewares';
+import { ExtendedRequest } from '@core/interfaces';
+import {
+    createComment,
+    deleteComment,
+    getCommentById,
+    getComments,
+    updateComment,
+} from './comment.service';
 
-class CommentController {
-  private readonly commentService: CommentService = Container.get(CommentService);
-
-  constructor() {}
-
-  getComments = asyncHandler(
+export const getCommentsHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.commentService.getAllComments();
-      res.status(200).json(response);
-    }
-  );
+        const response = await getComments();
+        res.status(200).json(response);
+    },
+);
 
-  getComment = asyncHandler(
+export const getCommentHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.commentService.getCommentById(req.params.id);
-      res.status(200).json(response);
-    }
-  );
+        const response = await getCommentById(req.params.id);
+        res.status(200).json(response);
+    },
+);
 
-  createComment = asyncHandler(
+export const createCommentHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      let response = await this.commentService.createComment(req.body);
-      res.status(200).json(response);
-    }
-  );
+        let response = await createComment(req.body);
+        res.status(200).json(response);
+    },
+);
 
-  updateComment = asyncHandler(
+export const updateCommentHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.commentService.updateComment(
-        req.params.id,
-        req.body
-      );
-      res.status(200).json(response);
-    }
-  );
+        const response = await updateComment(req.params.id, req.body);
+        res.status(200).json(response);
+    },
+);
 
-  deleteComment = asyncHandler(
+export const deleteCommentHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      let response = await this.commentService.deleteComment(req.params.id);
-      res.status(200).json(response);
-    }
-  );
-}
-
-export default new CommentController();
+        let response = await deleteComment(req.params.id);
+        res.status(200).json(response);
+    },
+);

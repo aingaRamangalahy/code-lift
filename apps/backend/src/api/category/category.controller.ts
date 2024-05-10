@@ -1,51 +1,45 @@
-import { Response, NextFunction } from "express";
-import { asyncHandler } from "@core/middlewares";
-import { ExtendedRequest } from "@core/interfaces";
-import Container from "typedi";
-import CategoryService from "./category.service";
+import { Response, NextFunction } from 'express';
+import { asyncHandler } from '@core/middlewares';
+import { ExtendedRequest } from '@core/interfaces';
+import {
+    createCategory,
+    deleteCategory,
+    getCategories,
+    getCategoryById,
+    updateCategory,
+} from './category.service';
 
-class CategoryController {
-  private readonly categoryService: CategoryService = Container.get(CategoryService);
-
-  constructor() {}
-
-  getCategories = asyncHandler(
+export const getCategoriesHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.categoryService.getAllCategories();
-      res.status(200).json(response);
-    }
-  );
+        const response = await getCategories();
+        res.status(200).json(response);
+    },
+);
 
-  getCategory = asyncHandler(
+export const getCategoryHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.categoryService.getCategoryById(req.params.id);
-      res.status(200).json(response);
-    }
-  );
+        const response = await getCategoryById(req.params.id);
+        res.status(200).json(response);
+    },
+);
 
-  createCategory = asyncHandler(
+export const createCategoryHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      let response = await this.categoryService.createCategory(req.body);
-      res.status(200).json(response);
-    }
-  );
+        let response = await createCategory(req.body);
+        res.status(200).json(response);
+    },
+);
 
-  updateCategory = asyncHandler(
+export const updateCategoryHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      const response = await this.categoryService.updateCategory(
-        req.params.id,
-        req.body
-      );
-      res.status(200).json(response);
-    }
-  );
+        const response = await updateCategory(req.params.id, req.body);
+        res.status(200).json(response);
+    },
+);
 
-  deleteCategory = asyncHandler(
+export const deleteCategoryHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-      let response = await this.categoryService.deleteCategory(req.params.id);
-      res.status(200).json(response);
-    }
-  );
-}
-
-export default new CategoryController();
+        let response = await deleteCategory(req.params.id);
+        res.status(200).json(response);
+    },
+);

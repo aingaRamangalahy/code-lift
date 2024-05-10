@@ -1,90 +1,73 @@
-import { Service } from "typedi";
-import { IUserDocument } from "./user.interface";
-import User from "./user.model";
-import { ErrorResponse } from "@core/utils";
-import { UserRepository } from "./user.repository";
+import User from './user.model';
+import { ErrorResponse } from '@core/utils';
 
-@Service()
-export default class UserService {
-    private readonly userRepository: UserRepository;
-
-    constructor() {
-        this.userRepository = new UserRepository(User);
+export const getAllUsers = async () => {
+    try {
+        const users = await User.find();
+        return {
+            success: true,
+            data: users,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to fetch users', 500);
     }
+};
 
-    createUser = async (userPayload: IUserDocument) => {
-        try {
-            const user = await this.userRepository.addUser(userPayload);
-            return {
-                success: true,
-                data: user,
-            };
-        } catch (error) {
-            /**thorw errors to let erroHandler handle them */
-            throw error;
+export const getUserById = async (userId) => {
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new ErrorResponse('User not found', 404);
         }
-    };
+        return {
+            success: true,
+            data: user,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to fetch user', 500);
+    }
+};
 
-    getAllUsers = async () => {
-        try {
-            const users = await this.userRepository.getUsers();
-            return {
-                success: true,
-                data: users,
-            };
-        } catch (error) {
-            throw error;
+export const createUser = async (userData) => {
+    try {
+        const user = await User.create(userData);
+        return {
+            success: true,
+            data: user,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to create user', 500);
+    }
+};
+
+export const updateUser = async (userId, userData) => {
+    try {
+        const user = await User.findByIdAndUpdate(userId, userData, {
+            new: true,
+        });
+        if (!user) {
+            throw new ErrorResponse('User not found', 404);
         }
-    };
+        return {
+            success: true,
+            data: user,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to update user', 500);
+    }
+};
 
-    getUserById = async (id: string) => {
-        try {
-            const user = await this.userRepository.getUserById(id);
-
-            if (!user) {
-                throw new ErrorResponse(`User with id: ${id} not found`, 404);
-            }
-
-            return {
-                success: true,
-                data: user,
-            };
-        } catch (error) {
-            throw error;
+export const deleteUser = async (userId) => {
+    try {
+        const user = await User.findByIdAndDelete(userId);
+        if (!user) {
+            throw new ErrorResponse('User not found', 404);
         }
-    };
-
-    updateUser = async (id: string, userPayload: IUserDocument) => {
-        try {
-            const user = await this.userRepository.updateUser(id, userPayload);
-
-            if (!user) {
-                throw new ErrorResponse(`User with id: ${id} not found`, 404);
-            }
-
-            return {
-                success: true,
-                data: user,
-            };
-
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    deleteUser = async (id: string) => {
-        try {
-            const user = await this.userRepository.deleteUser(id);
-            if (!user) {
-                throw new ErrorResponse(`User with id: ${id} not found`, 404);
-            }
-            return {
-                success: true,
-                data: `User removed successfully`,
-            };
-            
-        } catch (error) {
-            throw error;
-        }
-    };
-}
+        return {
+            success: true,
+            data: user,
+        };
+    } catch (error) {
+        throw new ErrorResponse('Failed to delete user', 500);
+    }
+};

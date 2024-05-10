@@ -1,43 +1,41 @@
-import { Router } from "express";
-import TopicController from "./topic.controller";
-import { auth } from "@core/middlewares";
-class TopicRouter {
-  router: Router;
+import { Router } from 'express';
+import {
+    getTopicHandler,
+    getTopicsHandler,
+    createTopicHandler,
+    updateTopicHandler,
+    deleteTopicHandler,
+} from './topic.controller';
+import { auth } from '@core/middlewares';
 
-  constructor() {
-    this.router = Router();
-    this.routes();
-  }
+const router = Router();
 
-  routes() {
-    // GET
-    this.router.get("/:id", TopicController.getTopic);
-    this.router.get("", TopicController.getTopics);
+// GET
+router.get('/:id', getTopicHandler);
+router.get('', getTopicsHandler);
 
-    // POST
-    this.router.post(
-        '',
-        auth.protectRoute,
-        auth.authorizedRoles('admin', 'super-admin'),
-        TopicController.createTopic
-    );
+// POST
+router.post(
+    '',
+    auth.protectRoute,
+    auth.authorizedRoles('admin', 'super-admin'),
+    createTopicHandler,
+);
 
-    // DELETE
-    this.router.delete(
-        '/:id',
-        auth.protectRoute,
-        auth.authorizedRoles('super-admin'),
-        TopicController.deleteTopic
-    );
+// DELETE
+router.delete(
+    '/:id',
+    auth.protectRoute,
+    auth.authorizedRoles('super-admin'),
+    deleteTopicHandler,
+);
 
-    // PUT
-    this.router.put(
-        '/:id',
-        auth.protectRoute,
-        auth.authorizedRoles('admin', 'super-admin'),
-        TopicController.updateTopic
-    );
-  }
-}
+// PUT
+router.put(
+    '/:id',
+    auth.protectRoute,
+    auth.authorizedRoles('admin', 'super-admin'),
+    updateTopicHandler,
+);
 
-export default new TopicRouter().router;
+export default router;

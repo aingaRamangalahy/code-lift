@@ -4,14 +4,14 @@ import 'reflect-metadata';
 import 'module-alias/register';
 
 import { Express } from 'express';
-import Server from './server';
+import { setupServer } from './server';
 import { PORT, API_URL } from './config';
 import { connectDatabase } from '@core/database';
 import { logger } from '@config/logger';
 
 const appPort = PORT || 5000;
 
-const bootstrapApplication = async (app: Express) => {
+const start = async (app: Express) => {
     try {
         await connectDatabase();
         app.listen(appPort, () => {
@@ -22,5 +22,5 @@ const bootstrapApplication = async (app: Express) => {
         process.exit(1);
     }
 };
-const app = Server.getServer();
-bootstrapApplication(app);
+const server = setupServer();
+start(server);

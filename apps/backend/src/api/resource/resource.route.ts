@@ -1,42 +1,36 @@
-import { Router } from "express";
-import ResourceController from "./resource.controller";
-import { auth } from "@core/middlewares";
-class ResourceRouter {
-  router: Router;
+import { Router } from 'express';
+import { auth } from '@core/middlewares';
+import {
+    getResourcesHandler,
+    getResourceHandler,
+    createResourceHandler,
+    deleteResourceHandler,
+    updateResourceHandler,
+} from './resource.controller';
 
-  constructor() {
-    this.router = Router();
-    this.routes();
-  }
+const router = Router();
 
-  routes() {
-    // GET
-    this.router.get("/:id", ResourceController.getResource);
-    this.router.get("", ResourceController.getResources);
+router.get('', getResourcesHandler);
+router.get('/:id', getResourceHandler);
 
-    // POST
-    this.router.post(
-        '',
-        auth.protectRoute,
-        auth.authorizedRoles('publisher', 'admin'),
-        ResourceController.createResource
-    );
+router.post(
+    '',
+    auth.protectRoute,
+    auth.authorizedRoles('publisher', 'admin'),
+    createResourceHandler,
+);
 
-    // DELETE
-    this.router.delete(
-        '/:id',
-        auth.authorizedRoles('publisher', 'admin', 'super-admin'),
-        ResourceController.deleteResource
-    );
+router.delete(
+    '/:id',
+    auth.authorizedRoles('publisher', 'admin', 'super-admin'),
+    deleteResourceHandler,
+);
 
-    // PUT
-    this.router.put(
-        '/:id',
-        auth.protectRoute,
-        auth.authorizedRoles('publisher', 'admin'),
-        ResourceController.updateResource
-    );
-  }
-}
+router.put(
+    '/:id',
+    auth.protectRoute,
+    auth.authorizedRoles('publisher', 'admin'),
+    updateResourceHandler,
+);
 
-export default new ResourceRouter().router;
+export default router;

@@ -1,20 +1,18 @@
 import { Router } from 'express';
-import authController from './auth.controller';
-class AuthRouter {
-    router: Router;
+import {
+    loginHandler,
+    registerHandler,
+    logoutHandler,
+    resetPasswordHandler,
+    forgotPasswordHandler,
+} from './auth.controller';
 
-    constructor() {
-        this.router = Router();
-        this.routes();
-    }
+const router = Router();
 
-    routes() {
-        this.router.post('/login', authController.login);
-        this.router.post('/register', authController.register);
-        this.router.post('/logout', authController.logout);
-        this.router.post('/forgot-password', authController.forgotPassword);
-        this.router.post('/reset-password', authController.resetPassword);
-    }
-}
+router.post('/login', loginHandler);
+router.post('/register', registerHandler);
+router.post('/logout', logoutHandler);
+router.post('/forgot-password', forgotPasswordHandler);
+router.post('/reset-password', resetPasswordHandler);
 
-export default new AuthRouter().router;
+export default router;

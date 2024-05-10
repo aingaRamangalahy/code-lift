@@ -1,39 +1,31 @@
 import { Router } from 'express';
-import CommentController from './comment.controller';
+import {
+    getCommentsHandler,
+    getCommentHandler,
+    createCommentHandler,
+    updateCommentHandler,
+    deleteCommentHandler,
+} from './comment.controller';
 import { auth } from '@core/middlewares';
-class CommentRouter {
-    router: Router;
 
-    constructor() {
-        this.router = Router();
-        this.routes();
-    }
+const router = Router();
 
-    routes() {
-        // GET
-        this.router.get('/:id', CommentController.getComment);
-        this.router.get('', CommentController.getComments);
+// GET
+router.get('', getCommentsHandler);
+router.get('/:id', getCommentHandler);
 
-        // POST
-        this.router.post(
-            '',
-            auth.protectRoute,
-            CommentController.createComment
-        );
+// POST
+router.post('', auth.protectRoute, createCommentHandler);
 
-        // DELETE
-        this.router.delete(
-            '/:id',
-            auth.protectRoute,
-            auth.authorizedRoles('admin', 'super-admin'),
-            CommentController.deleteComment
-        );
+// DELETE
+router.delete(
+    '/:id',
+    auth.protectRoute,
+    auth.authorizedRoles('admin', 'super-admin'),
+    deleteCommentHandler,
+);
 
-        // PUT
-        this.router.put('/:id',
-          auth.protectRoute,
-         CommentController.updateComment);
-    }
-}
+// PUT
+router.put('/:id', auth.protectRoute, updateCommentHandler);
 
-export default new CommentRouter().router;
+export default router;
