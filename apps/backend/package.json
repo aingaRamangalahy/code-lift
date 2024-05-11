@@ -5,11 +5,11 @@
     "main": "index.js",
     "scripts": {
         "test": "jest --detectOpenHandles",
-        "dev": "nodemon",
+        "dev": "concurrently \"tsc -w\" \"nodemon\"",
         "build": "tsc",
         "start": "node build/src/app.js",
         "generate": "node cli/cli.js",
-        "seeder": "ts-node-dev -r tsconfig-paths/register seeder/seed-db.ts"
+        "seeder": "ts-node -r tsconfig-paths/register seeder/seed-db.ts"
     },
     "_moduleAliases": {
         "@core": "build/src/core",
@@ -29,6 +29,7 @@
         "body-parser": "^1.20.2",
         "chalk": "^4.1.2",
         "commander": "^11.0.0",
+        "concurrently": "^8.2.2",
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
         "ejs": "^3.1.9",

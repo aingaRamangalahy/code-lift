@@ -16,7 +16,6 @@ export const createResource = async (resourcePayload: IResourceDocument) => {
 
 export const getResources = async () => {
     try {
-        console.log('getting all Resources...🔥 ');
         const resources = await Resource.find().populate('topics').sort({
             createdAt: -1,
         });

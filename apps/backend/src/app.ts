@@ -13,7 +13,7 @@ const start = async () => {
         const app = setupServer();
 
         app.listen(appPort, () => {
-            logger.info(`Server started at ${API_URL}:${appPort}`);
+            logger.info(`Server started at ${API_URL}`);
         });
     } catch (error) {
         logger.error(error);
