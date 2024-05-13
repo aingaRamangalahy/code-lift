@@ -37,8 +37,8 @@ export const useApi = (
                     color: 'red',
                 })
             } else {
-                const token = response._data.data.token
-                if (token) token.set(token)
+                const accessToken = response._data.token
+                if (accessToken) token.set(accessToken)
             }
         },
 

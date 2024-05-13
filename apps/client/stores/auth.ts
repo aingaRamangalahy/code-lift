@@ -1,5 +1,5 @@
 import type { IUser } from '@cl/types'
-import { login, register, logout } from '~/services/auth'
+import { loginService, registerService, logoutService } from '~/services/auth'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -21,8 +21,9 @@ export const useAuthStore = defineStore('auth', {
             const toast = useToast()
             try {
                 this.isLoading = true
-                const user = await login(email, password)
+                const user = await loginService(email, password)
                 this.setCurrentUser(user)
+                localStorage.setItem('user', JSON.stringify(user))
                 useLayoutStore().hideModal('signInModal')
                 toast.add({ title: 'User connected successfully' })
             } finally {
@@ -33,8 +34,9 @@ export const useAuthStore = defineStore('auth', {
         async register(name: string, email: string, password: string) {
             try {
                 this.isLoading = true
-                const user = await register(name, email, password)
-                if (user) this.setCurrentUser(user)
+                const user = await registerService(name, email, password)
+                this.setCurrentUser(user)
+                localStorage.setItem('user', JSON.stringify(user))
                 useLayoutStore().hideModal('signUpModal')
             } finally {
                 this.isLoading = false
@@ -44,8 +46,10 @@ export const useAuthStore = defineStore('auth', {
         async logout(userId: string) {
             try {
                 this.isLoading = true
-                await logout(userId)
+                await logoutService(userId)
                 this.currentUser = undefined
+                localStorage.removeItem('user')
+                useToken().removeToken()
             } finally {
                 this.isLoading = false
             }

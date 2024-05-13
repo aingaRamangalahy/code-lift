@@ -3,6 +3,10 @@ export const useToken = () => {
         localStorage.setItem('token', token)
     }
 
+    const removeToken = () => {
+        localStorage.removeItem('token')
+    }
+
     const get = () => {
         return localStorage.getItem('token')
     }
@@ -15,5 +19,5 @@ export const useToken = () => {
         return !!get()
     }
 
-    return { set, get, hasToken, bearerToken }
+    return { set, get, hasToken, bearerToken, removeToken }
 }
