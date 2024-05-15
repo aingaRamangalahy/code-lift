@@ -24,7 +24,7 @@ const menuActions = [
 </script>
 
 <template>
-    <header class="border-b sticky top-0 border-slate-700 py-4  h-[var(--header-height)]">
+    <header class="border-b sticky top-0 border-slate-700 py-4  h-[var(--header-height)] backdrop-blur-sm">
         <div class="container flex justify-between items-center">
             <h1 class="text-3xl font-bold">codelift</h1>
             <ClientOnly>
