@@ -5,7 +5,7 @@ const classConfig = ref({
 </script>
 <template>
     <aside :class="classConfig.aside">
-        <FilterSection />
+        <FormTopicsFilter />
     </aside>
 </template>
 <style scoped lang="scss"></style>

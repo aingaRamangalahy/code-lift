@@ -1,3 +1,3 @@
 import { Document } from 'mongoose';
-import { ITopic } from '@cl/types';
-export interface ITopicDocument extends ITopic, Document {}
+import { ITopicData } from '@cl/types';
+export interface ITopicDocument extends ITopicData, Document {}

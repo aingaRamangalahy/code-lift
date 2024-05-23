@@ -7,3 +7,7 @@ export enum AUTH_ROUTES {
 export enum RESOURCES_ROUTES {
     BASE = '/api/resources',
 }
+
+export enum TOPICS_ROUTES {
+    BASE = '/api/topics',
+}
