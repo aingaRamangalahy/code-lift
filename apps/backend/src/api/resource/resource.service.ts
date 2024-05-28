@@ -5,9 +5,12 @@ import { ErrorResponse } from '@core/utils';
 export const createResource = async (resourcePayload: IResourceDocument) => {
     try {
         const resource = await Resource.create(resourcePayload);
+        const populatedResource = await Resource.findById(
+            resource._id,
+        ).populate('topics');
         return {
             success: true,
-            data: resource,
+            data: populatedResource,
         };
     } catch (error) {
         throw error;

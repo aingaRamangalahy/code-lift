@@ -17,8 +17,9 @@ defineProps({
                 </p>
 
                 <div class="flex mt-2 gap-1">
-                    <UKbd value="#frontend" />
-                    <UKbd value="#intermediate" />
+                    <template v-for="topic in resource.topics" :key="topic._id">
+                        <UKbd> #{{ topic.name }}</UKbd>
+                    </template>
                 </div>
             </div>
         </div>

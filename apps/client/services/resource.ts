@@ -1,4 +1,4 @@
-import type { IResource } from '@cl/types'
+import type { IResource, IResourcePayloadData } from '@cl/types'
 import { RESOURCES_ROUTES } from '~/enums/routes'
 
 export const getResourcesService = async (): Promise<IResource[]> => {
@@ -7,7 +7,7 @@ export const getResourcesService = async (): Promise<IResource[]> => {
 }
 
 export const addResourceService = async (
-    resource: IResource
+    resource: IResourcePayloadData
 ): Promise<IResource> => {
     const { data } = await useApi(RESOURCES_ROUTES.BASE, {
         method: 'POST',

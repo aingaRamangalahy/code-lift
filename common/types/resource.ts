@@ -1,6 +1,7 @@
 import type { ObjectId } from 'mongoose'
+import type { ITopic } from './topic'
 
-export interface IResourceData {
+interface IBaseResource {
     title: string
     description: string
     publisher: string | ObjectId
@@ -8,11 +9,17 @@ export interface IResourceData {
     type?: string
     difficulty?: string
     vote?: number
-    topics?: string[]
     createdAt?: Date
     updatedAt?: Date
 }
 
-export interface IResource extends IResourceData {
-    _id?: string
+// Interface for payload data when creating or updating a resource
+export interface IResourcePayloadData extends IBaseResource {
+    topics?: string[]
+}
+
+// Interface for a resource retrieved from the database
+export interface IResource extends IBaseResource {
+    _id: string
+    topics?: ITopic[]
 }

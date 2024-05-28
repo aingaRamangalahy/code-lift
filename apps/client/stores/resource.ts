@@ -1,4 +1,4 @@
-import type { IResource } from '@cl/types'
+import type { IResource, IResourcePayloadData } from '@cl/types'
 import { getResourcesService, addResourceService } from '~/services/resource'
 
 export const useResourceStore = defineStore('resource', {
@@ -30,7 +30,7 @@ export const useResourceStore = defineStore('resource', {
             }
         },
 
-        async addResource(resource: IResource) {
+        async addResource(resource: IResourcePayloadData) {
             try {
                 this.isLoading = true
                 const result = await addResourceService(resource)

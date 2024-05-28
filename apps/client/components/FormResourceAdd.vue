@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import type { FormError, FormSubmitEvent } from '#ui/types'
-import type { IResource } from '@cl/types';
+import type { IResource, IResourcePayloadData } from '@cl/types';
 const authStore = useAuthStore()
 const resourceStore = useResourceStore()
+const topicStore = useTopicStore();
 
 const state = reactive({
     title: undefined,
     description: undefined,
     url: undefined,
-    publisher: authStore.currentUser?._id || ""
+    publisher: authStore.currentUser?._id || "",
+    topics: [],
+    topicList: topicStore.getTopics
 })
 
 
@@ -17,15 +20,18 @@ const validate = (state: any): FormError[] => {
     if (!state.title) errors.push({ path: 'title', message: 'Required' })
     if (!state.description) errors.push({ path: 'description', message: 'Required' })
     if (!state.url) errors.push({ path: 'url', message: 'Required' })
+    if (!state.topics) errors.push({ path: 'topics', message: 'Required' })
     return errors
 }
 
+
 async function onSubmit(event: FormSubmitEvent<any>) {
-    const resource: IResource = {
+    const resource: IResourcePayloadData = {
         title: event.data.title,
         description: event.data.description,
         url: event.data.url,
-        publisher: state.publisher
+        publisher: state.publisher,
+        topics: state.topics
     }
     resourceStore.addResource(resource)
 }
@@ -44,6 +50,15 @@ async function onSubmit(event: FormSubmitEvent<any>) {
         <UFormGroup label="Description" name="description">
             <UTextarea autoresize v-model="state.description" />
         </UFormGroup>
+
+        <UFormGroup label="Topics" name="topics">
+            <USelectMenu v-model="state.topics" multiple :options="state.topicList" value-attribute="_id"
+                option-attribute="name" />
+            <template v-for="topicId in state.topics" :key="topicId">
+                <UKbd class="m-2">#{{ topicStore.getTopicById(topicId)?.name }}</UKbd>
+            </template>
+        </UFormGroup>
+
 
         <UButton type="submit" class="self-end" :loading="resourceStore.isLoading">
             Add resource

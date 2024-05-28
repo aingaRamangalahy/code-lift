@@ -11,6 +11,11 @@ export const useTopicStore = defineStore('topic', {
         getTopics(state) {
             return state.topics
         },
+
+        getTopicById(state) {
+            return (id: string) =>
+                state.topics.find((topic) => topic._id === id)
+        },
     },
     actions: {
         async fetchTopics() {

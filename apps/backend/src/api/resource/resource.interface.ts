@@ -1,4 +1,4 @@
 import { Document } from 'mongoose';
-import { IResourceData } from '@cl/types';
+import { IResourcePayloadData } from '@cl/types';
 
-export interface IResourceDocument extends IResourceData, Document {}
+export interface IResourceDocument extends IResourcePayloadData, Document {}
