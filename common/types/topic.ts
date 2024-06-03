@@ -1,6 +1,7 @@
 export interface ITopicData {
-    name: String
-    description: String
+    name: string
+    description: string
+    icon?: string
     createdAt?: Date
     updatedAt?: Date
 }

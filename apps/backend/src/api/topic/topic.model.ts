@@ -11,6 +11,7 @@ let TopicSchema = new Schema<ITopicDocument>(
             type: String,
             required: [true, 'Please add a description'],
         },
+        icon: String,
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, required: false },
     },

@@ -4,7 +4,8 @@ defineProps({
 })
 </script>
 <template>
-    <div class="cursor-pointer hover:text-slate-200" :class="active ? 'text-primary-500 font-bold' : 'text-slate-400'">
+    <div class="flex items-center cursor-pointer hover:text-slate-200"
+        :class="active ? 'text-primary-500 font-bold' : 'text-slate-400'">
         <slot />
     </div>
 </template>

@@ -26,6 +26,7 @@ const filterData = (topic?: ITopic) => {
             </div>
             <div v-for="topic in useTopicStore().getTopics" @click="filterData(topic)">
                 <BaseMenuItem :active="topic._id === useTopicStore().currentTopic?._id">
+                    <UIcon class="mr-2" :name="topic.icon" dynamic />
                     {{ topic.name }}
                 </BaseMenuItem>
             </div>
