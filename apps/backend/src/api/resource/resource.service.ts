@@ -17,11 +17,15 @@ export const createResource = async (resourcePayload: IResourceDocument) => {
     }
 };
 
-export const getResources = async () => {
+export const getResources = async (query: any) => {
     try {
-        const resources = await Resource.find().populate('topics').sort({
-            createdAt: -1,
-        });
+        const filter: any = {};
+        if (query.topics) filter.topics = { $in: query.topics };
+        const resources = await Resource.find({ ...filter })
+            .populate('topics')
+            .sort({
+                createdAt: -1,
+            });
         return {
             success: true,
             data: resources,

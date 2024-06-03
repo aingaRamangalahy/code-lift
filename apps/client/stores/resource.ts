@@ -1,5 +1,9 @@
-import type { IResource, IResourcePayloadData } from '@cl/types'
-import { getResourcesService, addResourceService } from '~/services/resource'
+import type { IResource, IResourcePayloadData, ITopic } from '@cl/types'
+import {
+    getResourcesService,
+    addResourceService,
+    filterByTopic,
+} from '~/services/resource'
 
 export const useResourceStore = defineStore('resource', {
     state: () => ({
@@ -36,6 +40,16 @@ export const useResourceStore = defineStore('resource', {
                 const result = await addResourceService(resource)
                 this.resources.unshift(result)
                 useLayoutStore().hideModal('addResource')
+            } finally {
+                this.isLoading = false
+            }
+        },
+
+        async filterResourceByTopic(topic?: ITopic) {
+            try {
+                this.isLoading = true
+                const result = await filterByTopic(topic)
+                this.resources = result
             } finally {
                 this.isLoading = false
             }

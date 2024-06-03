@@ -11,7 +11,7 @@ import {
 
 export const getResourcesHandler = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
-        const response = await getResources();
+        const response = await getResources(req.query);
         res.status(200).json(response);
     },
 );

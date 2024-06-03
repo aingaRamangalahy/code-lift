@@ -1,6 +1,10 @@
-<script setup></script>
+<script setup>
+defineProps({
+    active: Boolean
+})
+</script>
 <template>
-    <div class="cursor-pointer text-slate-400 hover:text-slate-200">
+    <div class="cursor-pointer hover:text-slate-200" :class="active ? 'text-primary-500 font-bold' : 'text-slate-400'">
         <slot />
     </div>
 </template>

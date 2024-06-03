@@ -4,6 +4,7 @@ import { getTopicsService } from '~/services/topic'
 export const useTopicStore = defineStore('topic', {
     state: () => ({
         topics: [] as ITopic[],
+        currentTopic: undefined as ITopic | undefined,
         isLoading: false,
     }),
 
