@@ -24,17 +24,17 @@ Contributions to this project are welcome! If you would like to contribute, plea
 
 3. Commit your changes with a descriptive commit message. Use the following format for your commit messages:
 
-   - `feat`: A new feature is introduced with the changes
-   - `fix`: A bug fix has occurred
-   - `chore`: Changes that do not relate to a fix or feature and don't modify src or test files
-   - `refactor`: Refactored code that neither fixes a bug nor adds a feature
-   - `docs`: Updates to documentation such as the README or other markdown files
-   - `style`: Changes that do not affect the meaning of the code, likely related to code formatting
-   - `test`: Including new or correcting previous tests
-   - `perf`: Performance improvements
-   - `ci`: Continuous integration related
-   - `build`: Changes that affect the build system or external dependencies
-   - `revert`: Reverts a previous commit
+    - `feat`: A new feature is introduced with the changes
+    - `fix`: A bug fix has occurred
+    - `chore`: Changes that do not relate to a fix or feature and don't modify src or test files
+    - `refactor`: Refactored code that neither fixes a bug nor adds a feature
+    - `docs`: Updates to documentation such as the README or other markdown files
+    - `style`: Changes that do not affect the meaning of the code, likely related to code formatting
+    - `test`: Including new or correcting previous tests
+    - `perf`: Performance improvements
+    - `ci`: Continuous integration related
+    - `build`: Changes that affect the build system or external dependencies
+    - `revert`: Reverts a previous commit
 
 4. Push your changes to your forked repository.
 
@@ -47,37 +47,64 @@ If you have any questions or need further assistance, please feel free to contac
 Happy learning and coding!
 
 ### project structure
+
 ```
 code-lift
-├─ .prettierrc
-├─ README.md
-└─ backend
-   ├─ .env
-   ├─ .env.example
-   ├─ backend_logs
-   ├─ cli
-   │  ├─ cli.js
-   │  └─ templates
-   ├─ package-lock.json
-   ├─ package.json
-   ├─ src
-   │  ├─ api
-   │  │  ├─ auth
-   │  │  └─ user
-   │  ├─ app.ts
-   │  ├─ config
-   │  │  ├─ index.ts
-   │  │  └─ logger.ts
-   │  ├─ core
-   │  │  ├─ index.ts
-   │  │  ├─ interfaces
-   │  │  ├─ middlewares
-   │  │  ├─ repositories
-   │  │  └─ utils
-   │  │     ├─ errorResponse.ts
-   │  │     └─ index.ts
-   │  ├─ router.ts
-   │  └─ server.ts
-   └─ tsconfig.json
+├─ apps
+│  ├─ backend
+│  │  ├─ __tests__
+│  │  ├─ cli
+│  │  ├─ jest.config.js
+│  │  ├─ jest.setup.ts
+│  │  ├─ nodemon.json
+│  │  ├─ package.json
+│  │  ├─ seeder
+│  │  ├─ src
+│  │  │  ├─ api
+│  │  │  │  ├─ auth
+│  │  │  │  ├─ category
+│  │  │  │  ├─ comment
+│  │  │  │  ├─ resource
+│  │  │  │  ├─ topic
+│  │  │  │  └─ user
+│  │  │  ├─ app.ts
+│  │  │  ├─ config
+│  │  │  ├─ core
+│  │  │  │  ├─ database
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ interfaces
+│  │  │  │  ├─ middlewares
+│  │  │  │  └─ utils
+│  │  │  ├─ router.ts
+│  │  │  └─ server.ts
+│  │  ├─ tsconfig.json
+│  │  └─ tsconfig.test.json
+|  |   Dockerfile
+│  └─ client
+│     ├─ README.md
+│     ├─ app.config.ts
+│     ├─ app.vue
+│     ├─ assets
+│     │  └─ scss
+│     ├─ components
+│     ├─ composables
+│     ├─ enums
+│     ├─ eslint.config.ts
+│     ├─ layouts
+│     ├─ nuxt.config.ts
+│     ├─ package.json
+│     ├─ pages
+│     ├─ public
+│     ├─ services
+│     ├─ stores
+│     ├─ tailwind.config.ts
+│     ├─ tsconfig.json
+│     └─ types
+│        └─ httpResponse.ts
+|     |   Dockerfile
+├─ common
+│  └─ types
+├─ pnpm-lock.yaml
+└─ pnpm-workspace.yaml
 
 ```

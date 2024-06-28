@@ -1,5 +1,5 @@
 {
-    "name": "nuxt-app",
+    "name": "@cl/client",
     "private": true,
     "type": "module",
     "scripts": {
@@ -9,10 +9,12 @@
         "preview": "nuxt preview",
         "postinstall": "nuxt prepare",
         "lint": "eslint .",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "start": "node .output/server/index.mjs"
     },
     "dependencies": {
         "@cl/types": "workspace:^1.0.0",
+        "@iconify-json/heroicons": "^1.1.21",
         "@iconify-json/mdi": "^1.1.66",
         "@nuxt/ui": "^2.14.2",
         "@pinia/nuxt": "^0.5.1",
