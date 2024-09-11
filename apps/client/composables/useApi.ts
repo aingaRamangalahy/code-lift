@@ -1,4 +1,3 @@
-import type { UseFetchOptions } from '#app'
 import type { IhttpResponse } from '~/types/httpResponse'
 import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack'
 import defu from 'defu'
