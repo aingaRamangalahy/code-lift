@@ -4,6 +4,12 @@ import type { IUser } from '@cl/types';
 const layoutStore = useLayoutStore()
 const authStore = useAuthStore();
 
+const colorMode = useColorMode()
+
+const toggleColorMode = () => {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
+
 onBeforeMount(() => {
     const currentUserString = localStorage.getItem("user")
     const currentUser = currentUserString ? (JSON.parse(currentUserString) as IUser) : undefined
@@ -41,6 +47,9 @@ const menuActions = [
                         :popper="{ placement: 'bottom-start' }">
                         <UAvatar alt="authStore.currentUser?.name" size="sm" />
                     </UDropdown>
+                    <UButton
+                        :icon="colorMode.value === 'dark' ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+                        color="gray" variant="ghost" @click="toggleColorMode" />
                 </div>
             </ClientOnly>
 

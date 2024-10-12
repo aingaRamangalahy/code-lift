@@ -11,3 +11,7 @@ export enum RESOURCES_ROUTES {
 export enum TOPICS_ROUTES {
     BASE = '/api/topics',
 }
+
+export enum CATEGORIES_ROUTES {
+    BASE = '/api/categories',
+}

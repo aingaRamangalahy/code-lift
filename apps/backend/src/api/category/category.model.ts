@@ -7,12 +7,6 @@ let CategorySchema = new Schema<ICategoryDocument>(
             type: String,
             required: [true, 'Please add a name'],
         },
-        topics: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Topic',
-            },
-        ],
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, required: false },
     },

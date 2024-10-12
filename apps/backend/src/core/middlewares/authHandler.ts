@@ -9,10 +9,7 @@ import { JWT_SECRET } from '@config/index';
 const protectRoute = asyncHandler(
     async (req: ExtendedRequest, res: Response, next: NextFunction) => {
         let token;
-        if (
-            req.headers.authorization &&
-            req.headers.authorization.startsWith('Bearer')
-        ) {
+        if (req.headers.authorization?.startsWith('Bearer')) {
             // set token from Bearer token
             token = req.headers.authorization.split(' ')[1];
         }

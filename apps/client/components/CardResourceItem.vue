@@ -2,6 +2,7 @@
 import type { IResource } from '@cl/types';
 import type { PropType } from 'vue';
 
+const dateStore = useDate()
 const props = defineProps({
     resource: { type: Object as PropType<IResource>, required: true }
 })
@@ -12,7 +13,7 @@ const openLink = (link: string) => {
 }
 </script>
 <template>
-    <BaseCard>
+    <UCard>
         <div class="flex" @click.stop="openLink(resource?.url)">
             <div class="flex flex-col items-start mb-2">
                 <h3 class="text-lg font-medium">{{ resource?.title }}</h3>
@@ -21,11 +22,11 @@ const openLink = (link: string) => {
                         <UKbd> #{{ topic.name }}</UKbd>
                     </template>
                 </div>
-                <div class="mt-2 text-sm text-slate-400">{{ useDate().formatDate(resource?.createdAt) }}</div>
+                <div class="mt-2 text-sm text-slate-400">{{ dateStore.formatDate(resource?.createdAt) }}</div>
                 <p class="text-slate-400 my-2">
                     {{ resource?.description }}
                 </p>
             </div>
         </div>
-    </BaseCard>
+    </UCard>
 </template>
